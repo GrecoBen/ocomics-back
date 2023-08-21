@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ComicsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,23 @@ class Comics
      * @ORM\Column(type="smallint", nullable=true)
      */
     private $rarity;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="comics")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=characters::class, inversedBy="comics")
+     */
+    private $characters;
+
+
+    public function __construct()
+    {
+        $this->characters = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +122,42 @@ class Comics
     public function setRarity(?int $rarity): self
     {
         $this->rarity = $rarity;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?Author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Author $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, characters>
+     */
+    public function getCharacters(): Collection
+    {
+        return $this->characters;
+    }
+
+    public function addCharacter(characters $character): self
+    {
+        if (!$this->characters->contains($character)) {
+            $this->characters[] = $character;
+        }
+
+        return $this;
+    }
+
+    public function removeCharacter(characters $character): self
+    {
+        $this->characters->removeElement($character);
 
         return $this;
     }

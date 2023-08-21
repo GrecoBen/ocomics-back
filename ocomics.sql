@@ -16,8 +16,8 @@ CREATE TABLE `author` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
-DROP TABLE IF EXISTS `character`;
-CREATE TABLE `character` (
+DROP TABLE IF EXISTS `characters`;
+CREATE TABLE `characters` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `alias` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,

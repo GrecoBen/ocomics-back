@@ -2,14 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\CharacterRepository;
+use App\Repository\CharactersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CharacterRepository::class)
+ * @ORM\Entity(repositoryClass=CharactersRepository::class)
  * @ORM\Table(name="`character`")
  */
-class Character
+class Characters
 {
     /**
      * @ORM\Id
@@ -32,6 +34,16 @@ class Character
      * @ORM\Column(type="datetime_immutable")
      */
     private $released_at;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Comics::class, mappedBy="characters")
+     */
+    private $comics;
+
+    public function __construct()
+    {
+        $this->comics = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -70,6 +82,33 @@ class Character
     public function setReleasedAt(\DateTimeImmutable $released_at): self
     {
         $this->released_at = $released_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comics>
+     */
+    public function getComics(): Collection
+    {
+        return $this->comics;
+    }
+
+    public function addComic(Comics $comic): self
+    {
+        if (!$this->comics->contains($comic)) {
+            $this->comics[] = $comic;
+            $comic->addCharacter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComic(Comics $comic): self
+    {
+        if ($this->comics->removeElement($comic)) {
+            $comic->removeCharacter($this);
+        }
 
         return $this;
     }
