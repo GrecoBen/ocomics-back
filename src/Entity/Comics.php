@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ComicsRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\UserCollection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ComicsRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=ComicsRepository::class)
@@ -51,7 +52,7 @@ class Comics
     private $author;
 
     /**
-     * @ORM\ManyToMany(targetEntity=characters::class, inversedBy="comics")
+     * @ORM\ManyToMany(targetEntity=Characters::class, inversedBy="comics")
      */
     private $characters;
 
