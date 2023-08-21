@@ -55,10 +55,16 @@ class Comics
      */
     private $characters;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=UserCollection::class, mappedBy="comics")
+     */
+    private $userCollections;
+
 
     public function __construct()
     {
         $this->characters = new ArrayCollection();
+        $this->userCollections = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -158,6 +164,33 @@ class Comics
     public function removeCharacter(characters $character): self
     {
         $this->characters->removeElement($character);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserCollection>
+     */
+    public function getUserCollections(): Collection
+    {
+        return $this->userCollections;
+    }
+
+    public function addUserCollection(UserCollection $userCollection): self
+    {
+        if (!$this->userCollections->contains($userCollection)) {
+            $this->userCollections[] = $userCollection;
+            $userCollection->addComics($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserCollection(UserCollection $userCollection): self
+    {
+        if ($this->userCollections->removeElement($userCollection)) {
+            $userCollection->removeComics($this);
+        }
 
         return $this;
     }

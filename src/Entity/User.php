@@ -50,6 +50,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $username;
 
+    /**
+     * @ORM\OneToOne(targetEntity=UserCollection::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $userCollection;
+
+    /**
+ * @ORM\OneToMany(targetEntity=UserCollection::class, mappedBy="user", cascade={"persist", "remove"})
+ */
+    private $userCollections;
+
+    public function __construct()
+    {
+        $this->userCollections = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection<int, UserCollection>
+     */
+    public function getUserCollections(): Collection
+    {
+        return $this->userCollections;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -166,6 +189,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    public function getUserCollection(): ?UserCollection
+    {
+        return $this->userCollection;
+    }
+
+    public function setUserCollection(?UserCollection $userCollection): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($userCollection === null && $this->userCollection !== null) {
+            $this->userCollection->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($userCollection !== null && $userCollection->getUser() !== $this) {
+            $userCollection->setUser($this);
+        }
+
+        $this->userCollection = $userCollection;
 
         return $this;
     }

@@ -40,9 +40,15 @@ class Characters
      */
     private $comics;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=UserCollection::class, mappedBy="comics")
+     */
+    private $userCollections;
+
     public function __construct()
     {
         $this->comics = new ArrayCollection();
+        $this->userCollections = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,5 +117,13 @@ class Characters
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, UserCollection>
+     */
+    public function getUserCollections(): Collection
+    {
+        return $this->userCollections;
     }
 }
