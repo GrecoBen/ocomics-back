@@ -17,13 +17,11 @@ class ApiComicsController extends AbstractController
     /**
      * @Route("/api/comics", name="app_api_comics")
      */
-    public function listComics(ComicsRepository $comicsRepository, SerializerInterface $serializer): JsonResponse
+    public function listComics(ComicsRepository $comicsRepository): JsonResponse
     {
         $comics = $comicsRepository->findAll();
 
-        $json = $serializer->serialize($comics, 'json', ['groups' => 'comics']);
-
-        return new JsonResponse($json, Response::HTTP_OK, [], true);
+        return $this->json($comics, Response::HTTP_OK, [], ['groups' => 'comics']);
     }
 
      /**
