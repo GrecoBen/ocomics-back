@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ComicsRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ComicsRepository::class)
@@ -17,31 +18,37 @@ class Comics
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"comics"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Groups({"comics"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"comics"})
      */
     private $poster;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"comics"})
      */
     private $released_at;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"comics"})
      */
     private $synopsis;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
+     * @Groups({"comics"})
      */
     private $rarity;
 
