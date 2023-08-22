@@ -16,33 +16,10 @@ class ApiComicsController extends AbstractController
      */
     public function listComics(ComicsRepository $comicsRepository): JsonResponse
     {
+        // We retrieve the comics in the Database
         $comics = $comicsRepository->findAll();
-    
-        $comicsData = [];
-        foreach ($comics as $comic) {
-            $charactersData = [];
-            foreach ($comic->getCharacters() as $character) {
-                $charactersData[] = [
-                    'alias' => $character->getAlias(),
-                    'name' => $character->getName(),
-                    'released_at' => $character->getReleasedAt()->format('Y-m-d'),
-                ];
-            }
-    
-            $comicsData[] = [
-                'title' => $comic->getTitle(),
-                'poster' => $comic->getPoster(),
-                'released_at' => $comic->getReleasedAt()->format('Y-m-d'),
-                'synopsis' => $comic->getSynopsis(),
-                'rarity' => $comic->getRarity(),
-                'author' => [
-                    'firstname' => $comic->getAuthor()->getFirstname(),
-                    'lastname' => $comic->getAuthor()->getLastname(),
-                ],
-                'characters' => $charactersData,
-            ];
-        }
-    
-        return new JsonResponse($comicsData);
+
+        // we send a json response, with all the comics data, without the relation
+        return $this->json($comics, Response::HTTP_OK, [], ["groups" => "comics"]);
     }
 }
