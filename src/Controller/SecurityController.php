@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="app_security_login")
+     * @Route("api/login", name="app_security_login")
      */
     public function login(AuthenticationUtils $authenticationUtils): JsonResponse
     {
@@ -38,10 +38,51 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="app_security_logout")
+     * @Route("api/logout", name="app_security_logout")
      */
     public function logout()
     {
         // Symfony handles logout through this route
+    }
+
+    /**
+     * @Route("api/register", name="app_security_register")
+     */
+    public function registerForm(): JsonResponse
+    {
+        return new JsonResponse([
+            'fields' => [
+                [
+                    'name' => 'firstname',
+                    'type' => 'text',
+                    'label' => 'First Name',
+                    'required' => true,
+                ],
+                [
+                    'name' => 'lastname',
+                    'type' => 'text',
+                    'label' => 'Last Name',
+                    'required' => true,
+                ],
+                [
+                    'name' => 'username',
+                    'type' => 'text',
+                    'label' => 'Username',
+                    'required' => true,
+                ],
+                [
+                    'name' => 'email',
+                    'type' => 'email',
+                    'label' => 'Email',
+                    'required' => true,
+                ],
+                [
+                    'name' => 'password',
+                    'type' => 'password',
+                    'label' => 'Password',
+                    'required' => true,
+                ],
+            ],
+        ]);
     }
 }
