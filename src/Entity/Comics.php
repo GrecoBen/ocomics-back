@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ComicsRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\UserCollection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ComicsRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=ComicsRepository::class)
@@ -51,14 +52,20 @@ class Comics
     private $author;
 
     /**
-     * @ORM\ManyToMany(targetEntity=characters::class, inversedBy="comics")
+     * @ORM\ManyToMany(targetEntity=Characters::class, inversedBy="comics")
      */
     private $characters;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=UserCollection::class, mappedBy="comics")
+     */
+    private $userCollections;
 
 
     public function __construct()
     {
         $this->characters = new ArrayCollection();
+        $this->userCollections = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -158,6 +165,33 @@ class Comics
     public function removeCharacter(characters $character): self
     {
         $this->characters->removeElement($character);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserCollection>
+     */
+    public function getUserCollections(): Collection
+    {
+        return $this->userCollections;
+    }
+
+    public function addUserCollection(UserCollection $userCollection): self
+    {
+        if (!$this->userCollections->contains($userCollection)) {
+            $this->userCollections[] = $userCollection;
+            $userCollection->addComics($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserCollection(UserCollection $userCollection): self
+    {
+        if ($this->userCollections->removeElement($userCollection)) {
+            $userCollection->removeComics($this);
+        }
 
         return $this;
     }

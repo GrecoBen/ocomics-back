@@ -43,6 +43,7 @@ class Characters
     public function __construct()
     {
         $this->comics = new ArrayCollection();
+        $this->userCollections = new ArrayCollection();
     }
 
     public function getId(): ?int
