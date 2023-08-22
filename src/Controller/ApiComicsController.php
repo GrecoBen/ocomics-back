@@ -8,18 +8,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\SerializerInterface;
+
 
 class ApiComicsController extends AbstractController
 {
     /**
      * @Route("/api/comics", name="app_api_comics")
      */
-    public function listComics(ComicsRepository $comicsRepository): JsonResponse
+    public function listComics(ComicsRepository $comicsRepository, SerializerInterface $serializer): JsonResponse
     {
-        // We retrieve the comics in the Database
         $comics = $comicsRepository->findAll();
 
-        // we send a json response, with all the comics data, without the relation
-        return $this->json($comics, Response::HTTP_OK, [], ["groups" => "comics"]);
+        $json = $serializer->serialize($comics, 'json', ['groups' => 'comics']);
+
+        return new JsonResponse($json, Response::HTTP_OK, [], true);
     }
 }
