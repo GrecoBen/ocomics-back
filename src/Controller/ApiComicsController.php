@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Comics;
 use App\Repository\ComicsRepository;
 use App\Repository\CharactersRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +22,16 @@ class ApiComicsController extends AbstractController
         $comics = $comicsRepository->findAll();
 
         $json = $serializer->serialize($comics, 'json', ['groups' => 'comics']);
+
+        return new JsonResponse($json, Response::HTTP_OK, [], true);
+    }
+
+     /**
+     * @Route("/api/comics/{id}", name="app_api_comics_show", methods={"GET"})
+     */
+    public function showComics(Comics $comic, SerializerInterface $serializer): JsonResponse
+    {
+        $json = $serializer->serialize($comic, 'json', ['groups' => 'comics']);
 
         return new JsonResponse($json, Response::HTTP_OK, [], true);
     }
