@@ -2,11 +2,12 @@
 
 namespace App\DataFixtures;
 
+use Faker\Factory;
 use App\Entity\Comics;
-use App\Entity\Author; // N'oubliez pas d'importer l'entité Author
+use App\Entity\Characters;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Faker\Factory;
+use App\Entity\Author; // N'oubliez pas d'importer l'entité Author
 
 class AppFixtures extends Fixture
 {
@@ -24,6 +25,16 @@ class AppFixtures extends Fixture
             $authors[] = $author;
         }
 
+        //! Characters
+        for ($k=0; $k < 20; $k++) {
+            $character = new Characters();
+            $character->setAlias($faker->firstName);
+            $character->setName($faker->lastName);
+            $character->setReleasedAt(new \DateTimeImmutable($faker->date()));
+            $manager->persist($character);
+            $characters[] = $character;
+        }
+
         //! Comics
         for ($i = 0; $i < 20; $i++) {
             $comics = new Comics();
@@ -37,6 +48,9 @@ class AppFixtures extends Fixture
             $randomAuthor = $authors[array_rand($authors)];
             $comics->setAuthor($randomAuthor);
 
+            // Link the character and the comics
+            $randomCharacter = $characters[array_rand($characters)];
+            $comics->addCharacter($randomCharacter);
             $manager->persist($comics);
         }
 

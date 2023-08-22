@@ -14,7 +14,7 @@ class ApiComicsController extends AbstractController
     /**
      * @Route("/api/comics", name="app_api_comics")
      */
-    public function listComics(ComicsRepository $comicsRepository, CharactersRepository $charactersRepository): JsonResponse
+    public function listComics(ComicsRepository $comicsRepository): JsonResponse
     {
         $comics = $comicsRepository->findAll();
     
