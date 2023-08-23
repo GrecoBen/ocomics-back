@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 class ApiComicsController extends AbstractController
 {
     /**
-     * @Route("/api/comics", name="app_api_comics")
+     * @Route("/api/comics", name="app_api_comics", methods={"GET"})
      */
     public function listComics(ComicsRepository $comicsRepository): JsonResponse
     {
@@ -27,9 +27,9 @@ class ApiComicsController extends AbstractController
      /**
      * @Route("/api/comics/{id}", name="app_api_comics_show", methods={"GET"})
      */
-    public function showComics(Comics $comic, SerializerInterface $serializer): JsonResponse
+    public function showComics(Comics $comics, SerializerInterface $serializer): JsonResponse
     {
-        $json = $serializer->serialize($comic, 'json', ['groups' => 'comics']);
+        $json = $serializer->serialize($comics, 'json', ['groups' => 'comics']);
 
         return new JsonResponse($json, Response::HTTP_OK, [], true);
     }

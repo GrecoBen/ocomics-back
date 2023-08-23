@@ -73,7 +73,7 @@ class AppFixtures extends Fixture
 
         //! USER
 
-        for ($l = 0; $l < 2; $l++) {
+        for ($l = 0; $l < 6; $l++) {
             // j'utilise mon provider pour récupérer un user unique
             $dataUser = $faker->unique()->user();
             // J'instancie un nouvel obJet user
@@ -99,7 +99,7 @@ class AppFixtures extends Fixture
         //! UserCollection avec les utilisateurs créés en dur
 
         $userCollectionUsers = [];
-        for ($l = 0; $l < 2; $l++) {
+        for ($l = 0; $l < 6; $l++) {
             $userCollection = new UserCollection();
             $userCollection->setStatus($faker->randomElement([0, 1, 2]));
         

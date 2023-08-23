@@ -14,7 +14,27 @@ class AppProvider
             "email" => "user@oclock.io",
             "roles" => [],
             "password" => "user"
-        ]
+        ],
+        "nicolas" => [
+            "email" => "nicolas@oclock.io",
+            "roles" => ["ROLE_ADMIN"],
+            "password" => "nicolas"
+        ],
+        "ben" => [
+            "email" => "ben@oclock.io",
+            "roles" => ["ROLE_ADMIN"],
+            "password" => "ben"
+        ],
+        "hocine" => [
+            "email" => "hocine@oclock.io",
+            "roles" => ["ROLE_ADMIN"],
+            "password" => "hocine"
+        ],
+        "thanh" => [
+            "email" => "thanh@oclock.io",
+            "roles" => ["ROLE_ADMIN"],
+            "password" => "thanh"
+        ],
     ];
 
 
