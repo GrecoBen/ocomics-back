@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Entity\Comics;
+use App\Entity\Characters; 
 use App\Service\MarvelApiUrlGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -12,9 +12,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\HttpClient\HttpClient;
 use DateTimeImmutable;
 
-class ImportComicsCommand extends Command
+class ImportCharacterCommand extends Command
 {
-    protected static $defaultName = 'app:import-comics';
+    protected static $defaultName = 'app:import-character'; // Updated command name
     private $urlGenerator;
     private $entityManager;
 
@@ -28,16 +28,16 @@ class ImportComicsCommand extends Command
     protected function configure()
     {
         $this
-            ->setDescription('Import Marvel comics data from API')
-            ->setHelp('This command imports Marvel comics data from the API and stores it in the database');
+            ->setDescription('Import Marvel characters data from API') // Updated description
+            ->setHelp('This command imports Marvel characters data from the API and stores it in the database');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
-        // Generate the URL for comics information
-        $url = $this->urlGenerator->generateComicsUrl();
+        // Generate the URL for characters information
+        $url = $this->urlGenerator->generateCharactersUrl();
         
         // Create an HTTP client instance
         $httpClient = HttpClient::create();
@@ -48,36 +48,31 @@ class ImportComicsCommand extends Command
         // Convert the JSON response to an array
         $data = $response->toArray();
 
-        // Get the Marvel comics data
-        $marvelComics = $data['data']['results'];
+        // Get the Marvel characters data
+        $marvelCharacters = $data['data']['results'];
 
         // Save the data in the database
-        foreach ($marvelComics as $comicData) {
-            $comic = new Comics();
-            $comic->setTitle($comicData['title']);
+        foreach ($marvelCharacters as $characterData) {
+            $character = new Characters(); // Use the Characters entity
+            $character->setName($characterData['name']);
 
-
-        if (isset($comicData['description'])) {
-            $comic->setSynopsis($comicData['description']);
-        }
-            // Build the URL for the comic's thumbnail
-            $thumbnailUrl = $comicData['thumbnail']['path'] . '.' . $comicData['thumbnail']['extension'];
-            $comic->setPoster($thumbnailUrl);
+            $thumbnailUrl = $characterData['thumbnail']['path'] . '.' . $characterData['thumbnail']['extension'];
+            $character->setAlias($thumbnailUrl);
 
             // Generate a random release date
             $randomTimestamp = mt_rand(strtotime('-10 years'), time());
             $randomDate = DateTimeImmutable::createFromFormat('U', $randomTimestamp);
-            $comic->setReleasedAt($randomDate);
-
-            // Persist the comic entity
-            $this->entityManager->persist($comic);
+            $character->setReleasedAt($randomDate); 
+            
+            // Persist the character entity
+            $this->entityManager->persist($character);
         }        
 
         // Execute the database operations
         $this->entityManager->flush();
 
         // Display success message
-        $io->success('Marvel comics data imported successfully!');
+        $io->success('Marvel characters data imported successfully!');
 
         return Command::SUCCESS;
     }

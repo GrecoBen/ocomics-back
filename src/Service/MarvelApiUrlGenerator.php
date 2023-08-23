@@ -32,7 +32,7 @@ class MarvelApiUrlGenerator
         );
     }
 
-    public function generateComicsUrl($limit = 5, $offset = 0)
+    public function generateComicsUrl($limit = 20, $offset = 0)
     {
         // Base URL for comics endpoint
         $baseUrl = 'https://gateway.marvel.com:443/v1/public/comics';
@@ -48,4 +48,22 @@ class MarvelApiUrlGenerator
         
         return $url;
     }
+
+    public function generateCharactersUrl($limit = 10, $offset = 0)
+{
+    // Base URL for characters endpoint
+    $baseUrl = 'https://gateway.marvel.com:443/v1/public/characters';
+    
+    // Create a timestamp for the current time
+    $timestamp = time();
+    
+    // Generate a hash using the timestamp, private key, and public key
+    $hash = md5($timestamp . $this->privateKey . $this->publicKey);
+
+    // Construct the characters URL with timestamp, public key, hash, limit, and offset
+    $url = "$baseUrl?ts=$timestamp&apikey=$this->publicKey&hash=$hash&limit=$limit&offset=$offset";
+    
+    return $url;
+}
+
 }
