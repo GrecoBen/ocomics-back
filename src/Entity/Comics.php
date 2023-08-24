@@ -54,7 +54,7 @@ class Comics
 
     /**
      * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="comics")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $author;
 
