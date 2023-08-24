@@ -17,7 +17,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class AppFixtures extends Fixture
 {
 
-    // ! Ceci est de l'injection de dépandance
+    //Dependency injection
     private $passwordHasher;
     
     public function __construct(UserPasswordHasherInterface $passwordHasher)
@@ -29,11 +29,16 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create("fr_FR");
-        // ici j'ajoute mon provider personnalisé
+        // Our custom provider for the user data
         $faker->addProvider(new AppProvider());
 
+        // Initialition of three arrays, to store comics and users object in an array for the user_collection_comics fixture
+        $comicsArray = []; 
+        $usersArray = []; 
+        $userCollectionUsers = []; 
+
         //! Author
-        // Create an Author that will br link to a Comics
+        // Create several Authors that will br link to a Comics
         for ($j= 0; $j < 20; $j++) {
             $author = new Author();
             $author->setFirstname($faker->firstName);
@@ -43,6 +48,7 @@ class AppFixtures extends Fixture
         }
 
         //! Characters
+        //Create several characters that will be link to a Comics
         for ($k=0; $k < 20; $k++) {
             $character = new Characters();
             $character->setAlias($faker->firstName);
@@ -53,6 +59,7 @@ class AppFixtures extends Fixture
         }
 
         //! Comics
+        //Create several comics 
         for ($i = 0; $i < 20; $i++) {
             $comics = new Comics();
             $comics->setTitle($faker->words(3, true));
@@ -61,60 +68,56 @@ class AppFixtures extends Fixture
             $comics->setPoster("https://picsum.photos/id/" . mt_rand(50, 120) . "/768/1024");
             $comics->setRarity($faker->randomFloat(1, 1, 5));
 
-            // Link the author and the comics
+            // Link the author to the created comics
             $randomAuthor = $authors[array_rand($authors)];
             $comics->setAuthor($randomAuthor);
 
-            // Link the character and the comics
+            // Link the character to the created comics
             $randomCharacter = $characters[array_rand($characters)];
             $comics->addCharacter($randomCharacter);
             $manager->persist($comics);
+            // insert the comics object in the array
+            $comicsArray[] = $comics; 
         }
 
         //! USER
 
         for ($l = 0; $l < 6; $l++) {
-            // j'utilise mon provider pour récupérer un user unique
+            // we user our custom provider to get unique user
             $dataUser = $faker->unique()->user();
-            // J'instancie un nouvel obJet user
+            // Instanciation of the user object
             $user = new User();
-            // Je set l'email, c'est une string simple
+
             $user->setEmail($dataUser["email"]);
-            // Je set les roles, c'est un tableau
             $user->setRoles($dataUser["roles"]);
             $user->setUsername($faker->text(15));
             $user->setFirstname($faker->firstName);
             $user->setLastname($faker->lastName);
-            // Je set le password, c'est une string simple
-            // J'utilise le passwordHasher passé au constructeur, ça s'appelle de l'injection de dépendance (on en parlera dans les prochains jours), il contient la méthode hashPassword qui permet de changer une string en hash par rapport à la méthode de hashage définis dans security.yaml
-            // ! SI PAS DE HASH, PAS POSSIBLE DE S'AUTHENTIFIER
-            // ! DE PLUS UN MDP EN CLAIR EN BDD EST A LA LIMITE DE L'ILLEGALITE
+            // In order to set the password, we need to use the passwordHasher initialize threw the constructor and hash it. security.yaml is provided by symfony with a password hasher method
             $user->setPassword($this->passwordHasher->hashPassword($user, $dataUser["password"]));
         
-            // On oublis pas de persister l'objet
             $manager->persist($user);
-            $users[] = $user;
+            // insert the user object in the array
+            $usersArray[] = $user;
         }
 
-        //! UserCollection avec les utilisateurs créés en dur
+        //! UserCollection
 
-        $userCollectionUsers = [];
-        for ($l = 0; $l < 6; $l++) {
+        for ($m = 0; $m < 6; $m++) {
             $userCollection = new UserCollection();
             $userCollection->setStatus($faker->randomElement([0, 1, 2]));
-        
-            // Link the user and the user collection (randomly choose from existing users)
-            $randomUser = $faker->randomElement($users);
-            if (!in_array($randomUser, $userCollectionUsers)) {
-                $userCollection->setUser($randomUser);
-                $userCollectionUsers[] = $randomUser;
-            }
-        
-            // Link the comics and the user collection (your existing code)
-        
-            $manager->persist($userCollection);
-        }
 
+            // Link the comics and the UserCollection
+            $randomComic = $comicsArray[array_rand($comicsArray)];
+            $userCollection->addComics($randomComic);
+
+            // Link the user and the UserCollection
+            $randomUser = $usersArray[$m]; 
+            $userCollection->setUser($randomUser);
+
+            $manager->persist($userCollection);
+            $userCollectionUsers[] = $randomUser;
+        }
         $manager->flush();
     }
 }
