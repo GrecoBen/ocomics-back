@@ -41,7 +41,7 @@ class Comics
     private $released_at;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      * @Groups({"comics"})
      */
     private $synopsis;

@@ -25,7 +25,7 @@ class Characters
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=255)
      * @Groups({"characters"})
      */
     private $alias;
@@ -50,7 +50,6 @@ class Characters
     public function __construct()
     {
         $this->comics = new ArrayCollection();
-        $this->userCollections = new ArrayCollection();
     }
 
     public function getId(): ?int
