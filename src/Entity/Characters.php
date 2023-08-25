@@ -28,7 +28,7 @@ class Characters
      * @ORM\Column(type="string", length=255)
      * @Groups({"characters"})
      */
-    private $alias;
+    private $poster;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
@@ -57,14 +57,14 @@ class Characters
         return $this->id;
     }
 
-    public function getAlias(): ?string
+    public function getPoster(): ?string
     {
-        return $this->alias;
+        return $this->poster;
     }
 
-    public function setAlias(string $alias): self
+    public function setPoster(string $poster): self
     {
-        $this->alias = $alias;
+        $this->poster = $poster;
 
         return $this;
     }
