@@ -59,13 +59,18 @@ class AppFixtures extends Fixture
         }
 
         //! Comics
+
+        
         //Create several comics 
         for ($i = 0; $i < 20; $i++) {
             $comics = new Comics();
-            $comics->setTitle($faker->words(3, true));
+
+            $randomComicInfo = $faker->randomElement($faker->comicsInfos());
+
+            $comics->setTitle($randomComicInfo['title']);
             $comics->setReleasedAt(new \DateTimeImmutable($faker->date()));
             $comics->setSynopsis($faker->paragraphs(5, true));
-            $comics->setPoster("https://picsum.photos/id/" . mt_rand(50, 120) . "/768/1024");
+            $comics->setPoster($randomComicInfo['poster']);
             $comics->setRarity($faker->randomFloat(1, 1, 5));
 
             // Link the author to the created comics

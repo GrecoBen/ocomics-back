@@ -37,6 +37,302 @@ class AppProvider
         ],
     ];
 
+    // private $comicsData = [
+    //     "Official Handbook of the Marvel Universe (2004) #13 (TEAMS)",
+    //     "MARVEL MASTERWORKS: THE UNCANNY X-MEN VOL. 3 HC (Trade Paperback)",
+    //     "Ant-Man (2003) #4",
+    //     "Official Handbook of the Marvel Universe (2004) #14 (FANTASTIC FOUR)",
+    //     "Kabuki Reflections Vol. 1 (Hardcover)",
+    //     "Official Handbook of the Marvel Universe (2004) #9 (THE WOMEN OF MARVEL)",
+    //     "Storm (2006)",
+    //     "The Stand: American Nightmares HC (Hardcover)",
+    //     "Ant-Man (2003) #2",
+    //     "Official Handbook of the Marvel Universe (2004) #11 (X-MEN - AGE OF APOCALYPSE)",
+    //     "Marvel Previews (2017)",
+    //     "Punishermax: Kingpin (2010)",
+    //     "Marvel Adventures Super Heroes Special (2010) #1",
+    //     "Ant-Man (2003) #3",
+    //     "Official Handbook of the Marvel Universe (2004) #10 (MARVEL KNIGHTS)",
+    //     "Magician: Apprentice Riftwar Saga (2010) #13",
+    //     "Ultimate Spider-Man (2000) #110 (Mark Bagley Variant)",
+    //     "ULTIMATE X-MEN VOL. 5: ULTIMATE WAR TPB (Trade Paperback)",
+    //     "Marvel Age Spider-Man Vol. 2: Everyday Hero (Digest)",
+    //     "Marvels Vol. 1 (1994) #7",
+    //     "X-Men: Phoenix - Warsong (2006)",
+    //     "Wolverine Saga (2009) #7",
+    //     "Official Handbook of the Marvel Universe (2004) #12 (SPIDER-MAN)",
+    //     "Halo Chronicles (2009) #1",
+    //     "Marvel Previews (2017)",
+    //     "Marvels Vol. 1 (1994) #1",
+    //     "Holiday Special (1969) #1",
+    //     "Civil War (Hardcover)",
+    //     "Marvels Vol. 1 (1994) #8",
+    //     "Amazing Spider-Man 500 Covers Slipcase - Book II (Trade Paperback)",
+    //     "Penance: Relentless (2008)",
+    //     "Marvels Vol. 1 (1994) #3",
+    //     "Gun Theory (2003) #3",
+    //     "Official Marvel Universe Handbook (2009) #2",
+    //     "Sentry, the (Trade Paperback)",
+    //     "Ant-Man (2003) #1",
+    //     "X-Men: Days of Future Past (Trade Paperback)"
+    // ];
+
+    // private $comicsPosterData = [
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/f/20/4bc63a47b8dcb.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/9/10/4bb3c93c1725d.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/4/20/4bc697c680890.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/9/90/4bc6353e5fc56.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/e/e0/4bac3ad5d17c7.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/9/b0/4c7d666c0e58a.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/c/80/4bc5fe7a308d7.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/a/10/4bb59859e2e3e.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/f/20/4bc69f33cafc0.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/9/30/4bc6494ed6eb4.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/c/80/5e3d7536c8ada.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/5/90/4c4e014aa3086.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/d/70/4bc69c7e9b9d7.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/9/30/4bc64df4105b9.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/c/b0/4bc6670c80007.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/9/20/4bc665483c3aa.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/c/e0/4bc4947ea8f4d.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/2/f0/4bc6650c80007.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/6/50/4c3645d0d29e3.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/b/40/4bc64020a4ccc.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/f/c0/4bc66d78f1bee.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/6/e0/4bc6a2497684e.jpg",
+    //     "http://i.annihil.us/u/prod/marvel/i/mg/9/d0/58b5cfb6d5239.jpg"
+    // ];
+
+    private $comicsInfos = [
+        [
+            "title" => "Official Handbook of the Marvel Universe (2004) #13 (TEAMS)",
+            "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/f/20/4bc63a47b8dcb.jpg"
+        ],
+        [
+            "title" => "Amazing Spider-Man (1999) #558 (Turner Variant)",
+            "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+            "title" => "Startling Stories: The Incorrigible Hulk (2004) #1",
+            "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "MARVEL MASTERWORKS: THE UNCANNY X-MEN VOL. 3 HC (Trade Paperback)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/9/10/4bb3c93c1725d.jpg"
+        ],
+        [
+        "title" => "Marvels Vol. 1 (1994) #6",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "Ant-Man (2003) #4",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/4/20/4bc697c680890.jpg"
+        ],
+        [
+        "title" => "Official Handbook of the Marvel Universe (2004) #14 (FANTASTIC FOUR)",
+        "poster"=> "http://i.annihil.us/u/prod/marvel/i/mg/9/90/4bc6353e5fc56.jpg"
+        ],
+        [
+        "title" => "Kabuki Reflections Vol. 1 (Hardcover)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/e/e0/4bac3ad5d17c7.jpg"
+        ],
+        [
+        "title" => "Official Handbook of the Marvel Universe (2004) #9 (THE WOMEN OF MARVEL)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/9/b0/4c7d666c0e58a.jpg"
+        ],
+        [
+        "title" => "Marvel Previews (2017)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "Storm (2006)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/c/80/4bc5fe7a308d7.jpg"
+        ],
+        [
+        "title" => "The Stand: American Nightmares HC (Hardcover)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/a/10/4bb59859e2e3e.jpg"
+        ],
+        [
+        "title" => "Marvel Milestones (2005) #22",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "Ant-Man (2003) #2",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/f/20/4bc69f33cafc0.jpg"
+        ],
+        [
+        "title" => "Official Handbook of the Marvel Universe (2004) #11 (X-MEN - AGE OF APOCALYPSE)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/c/b0/4bc6494ed6eb4.jpg"
+        ],
+        [
+        "title" => "Marvel Previews (2017)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/c/80/5e3d7536c8ada.jpg"
+        ],
+        [
+        "title" => "Punishermax: Kingpin (2010)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/5/90/4c4e014aa3086.jpg"
+        ],
+        [
+        "title" => "Marvel Adventures Super Heroes Special (2010) #1",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "Ant-Man (2003) #3",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/d/70/4bc69c7e9b9d7.jpg"
+        ],
+        [
+        "title" => "Official Handbook of the Marvel Universe (2004) #10 (MARVEL KNIGHTS)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/9/30/4bc64df4105b9.jpg"
+        ],
+        [
+        "title" => "Magician: Apprentice Riftwar Saga (2010) #13",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "Ultimate Spider-Man (2000) #110 (Mark Bagley Variant)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/c/e0/4bc4947ea8f4d.jpg"
+        ],
+        [
+        "title" => "ULTIMATE X-MEN VOL. 5: ULTIMATE WAR TPB (Trade Paperback)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/2/f0/4bc6670c80007.jpg"
+        ],
+        [
+        "title" => "Marvel Age Spider-Man Vol. 2: Everyday Hero (Digest)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/9/20/4bc665483c3aa.jpg"
+        ],
+        [
+        "title" => "Marvels Vol. 1 (1994) #7",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "X-Men: Phoenix - Warsong (2006)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/6/50/4c3645d0d29e3.jpg"
+        ],
+        [
+        "title" => "Wolverine Saga (2009) #7",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "Official Handbook of the Marvel Universe (2004) #12 (SPIDER-MAN)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/4bc64020a4ccc.jpg"
+        ],
+        [
+        "title" => "Halo Chronicles (2009) #1",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "Marvel Previews (2017)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "Marvels Vol. 1 (1994) #1",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "Incredible Hulks (2010) #604 (DJURDJEVIC 70TH ANNIVERSARY VARIANT)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/d0/4badb223f33c9.jpg"
+        ],
+        [
+        "title" => "Holiday Special (1969) #1",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "Civil War (Hardcover)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/8/c0/51dda501724ed.jpg"
+        ],
+        [
+        "title" => "Ultimate Spider-Man Ultimate Collection Book 1 (Trade Paperback)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/6/c0/59079911f0fdb.jpg"
+        ],
+        [
+        "title" => "Marvels Vol. 1 (1994) #8",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "Amazing Spider-Man 500 Covers Slipcase - Book II (Trade Paperback)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "Halo Chronicles (2009) #2",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/1/e0/4bb4ecb6aa5a9.jpg"
+        ],
+        [
+        "title" => "Penance: Relentless (2008)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/9/90/4bb860a46f58d.jpg"
+        ],
+        [
+        "title" => "Marvels Vol. 1 (1994) #3",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "Silver Surfer (1987)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "Gun Theory (2003) #3",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/c/60/4bc69f11baf75.jpg"
+        ],
+        [
+        "title" => "Gun Theory (2003) #4",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/c/60/4bc69f11baf75.jpg"
+        ],
+        [
+        "title" => "Marvels Vol. 1 (1994) #9",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "Hedge Knight II: Sworn Sword (2007) #1 (Yu Variant)",
+        "poster"=> "http://i.annihil.us/u/prod/marvel/i/mg/9/50/4bc49463dad62.jpg"
+        ],
+        [
+        "title" => "Official Marvel Universe Handbook (2009) #2",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "Marvels Vol. 1 (1994) #4",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        ],
+        [
+        "title" => "Sentry, the (Trade Paperback)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/f/c0/4bc66d78f1bee.jpg"
+        ],
+        [
+        "title" => "Ant-Man (2003) #1",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/6/e0/4bc6a2497684e.jpg"
+        ],
+        [
+        "title" => "X-Men: Days of Future Past (Trade Paperback)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/9/d0/58b5cfb6d5239.jpg"
+        ]
+    ];
+
+    // /**
+    //  * get a random comics from the provider
+    //  * @return string random comics
+    //  */
+    // public function comics() :string
+    // {
+    //     return $this->comicsData[array_rand($this->comicsData)];
+    // }
+
+    // /**
+    //  * get a random comicsPoster from the provider
+    //  * @return string random comicsPoster
+    //  */
+    // public function comicsPoster() :string
+    // {
+    //     return $this->comicsPosterData[array_rand($this->comicsPosterData)];
+    // }
+
+    /**
+     * Get a random Comics with his poster from the provider
+     *
+     * @return array random Comics with associated poster
+     */
+    public function comicsInfos()
+    {
+        return $this->comicsInfos;
+    }
 
     /**
      * Get a a user, available roles : admin, email
@@ -50,4 +346,6 @@ class AppProvider
         }
         return $this->user[array_rand($this->user)];
     }
+
+
 }
