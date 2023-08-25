@@ -86,10 +86,10 @@ class MarvelController extends AbstractController
     /**
      * @Route("/get-random-marvel-comics")
      */
-    public function getRandomMarvelComics(Request $request, MarvelApiUrlGenerator $urlGenerator): Response
+    public function getRandomMarvelComics(MarvelApiUrlGenerator $urlGenerator): Response
     {
         // Define the limit of items to retrieve
-        $limit = 50; 
+        $limit = 50;
 
         // Generate the URL for comics information using the provided service
         $url = $urlGenerator->generateComicsUrl($limit);
@@ -126,4 +126,47 @@ class MarvelController extends AbstractController
         $responseContent = json_encode($randomComicData, JSON_PRETTY_PRINT);
         return new Response($responseContent, 200, ['Content-Type' => 'application/json']);
     }
-}
+
+    /**
+     * @Route("/get-random-marvel-characters")
+     */
+    public function getRandomMarvelCharacters(Request $request, MarvelApiUrlGenerator $urlGenerator): Response
+    {
+        // Define the limit of items to retrieve
+        $limit = 50;
+
+        // Generate the URL for characters information using the provided service
+        $url = $urlGenerator->generateCharactersUrl($limit);
+
+        // Create an HTTP client instance
+        $httpClient = HttpClient::create();
+
+        // Send a GET request to the generated URL
+        $response = $httpClient->request('GET', $url);
+
+        // Convert the JSON response to a PHP array
+        $data = $response->toArray();
+
+        // Retrieve the characters data
+        $marvelCharacters = $data['data']['results'];
+
+        // Shuffle the array of characters randomly
+        shuffle($marvelCharacters);
+
+        // Extract random character names and their thumbnail URLs
+        $randomCharacterData = [];
+        for ($j= 0; $j < $limit; $j++) {
+            if (isset($marvelCharacters[$j]['name']) && isset($marvelCharacters[$j]['thumbnail']['path']) && isset($marvelCharacters[$j]['thumbnail']['extension'])) {
+                $characterName = $marvelCharacters[$j]['name'];
+                $thumbnailUrl = $marvelCharacters[$j]['thumbnail']['path'] . '.' . $marvelCharacters[$j]['thumbnail']['extension'];
+                $randomCharacterData[] = [
+                    'name' => $characterName,
+                    'thumbnail' => $thumbnailUrl,
+                ];
+            }
+        }
+        // Create a response with the random comic data
+        $responseContent = json_encode($randomCharacterData, JSON_PRETTY_PRINT);
+        return new Response($responseContent, 200, ['Content-Type' => 'application/json']);
+    }
+};

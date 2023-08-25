@@ -51,16 +51,17 @@ class AppFixtures extends Fixture
         //Create several characters that will be link to a Comics
         for ($k=0; $k < 20; $k++) {
             $character = new Characters();
-            $character->setPoster("https://picsum.photos/id/" . mt_rand(50, 120) . "/768/1024");
-            $character->setName($faker->lastName);
+
+            $randomCharacterInfo = $faker->randomElement($faker->charactersInfos());
+
+            $character->setPoster($randomCharacterInfo['poster']);
+            $character->setName($randomCharacterInfo['name']);
             $character->setReleasedAt(new \DateTimeImmutable($faker->date()));
             $manager->persist($character);
             $characters[] = $character;
         }
 
         //! Comics
-
-        
         //Create several comics 
         for ($i = 0; $i < 20; $i++) {
             $comics = new Comics();

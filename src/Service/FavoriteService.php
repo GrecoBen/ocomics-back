@@ -18,6 +18,4 @@ class FavoriteService
         $this->requestStack = $requestStack;
         $this->maxFav = $maxFav;
     }
-
-    // ... (autres méthodes comme getAll, toggle, empty adaptées pour les Comics)
 }
