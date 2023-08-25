@@ -109,20 +109,8 @@ class AppProvider
             "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/f/20/4bc63a47b8dcb.jpg"
         ],
         [
-            "title" => "Amazing Spider-Man (1999) #558 (Turner Variant)",
-            "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
-        ],
-        [
-            "title" => "Startling Stories: The Incorrigible Hulk (2004) #1",
-            "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
-        ],
-        [
         "title" => "MARVEL MASTERWORKS: THE UNCANNY X-MEN VOL. 3 HC (Trade Paperback)",
         "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/9/10/4bb3c93c1725d.jpg"
-        ],
-        [
-        "title" => "Marvels Vol. 1 (1994) #6",
-        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
         ],
         [
         "title" => "Ant-Man (2003) #4",
@@ -141,20 +129,12 @@ class AppProvider
         "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/9/b0/4c7d666c0e58a.jpg"
         ],
         [
-        "title" => "Marvel Previews (2017)",
-        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
-        ],
-        [
         "title" => "Storm (2006)",
         "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/c/80/4bc5fe7a308d7.jpg"
         ],
         [
         "title" => "The Stand: American Nightmares HC (Hardcover)",
         "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/a/10/4bb59859e2e3e.jpg"
-        ],
-        [
-        "title" => "Marvel Milestones (2005) #22",
-        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
         ],
         [
         "title" => "Ant-Man (2003) #2",
@@ -173,20 +153,12 @@ class AppProvider
         "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/5/90/4c4e014aa3086.jpg"
         ],
         [
-        "title" => "Marvel Adventures Super Heroes Special (2010) #1",
-        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
-        ],
-        [
         "title" => "Ant-Man (2003) #3",
         "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/d/70/4bc69c7e9b9d7.jpg"
         ],
         [
         "title" => "Official Handbook of the Marvel Universe (2004) #10 (MARVEL KNIGHTS)",
         "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/9/30/4bc64df4105b9.jpg"
-        ],
-        [
-        "title" => "Magician: Apprentice Riftwar Saga (2010) #13",
-        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
         ],
         [
         "title" => "Ultimate Spider-Man (2000) #110 (Mark Bagley Variant)",
@@ -201,40 +173,16 @@ class AppProvider
         "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/9/20/4bc665483c3aa.jpg"
         ],
         [
-        "title" => "Marvels Vol. 1 (1994) #7",
-        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
-        ],
-        [
         "title" => "X-Men: Phoenix - Warsong (2006)",
         "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/6/50/4c3645d0d29e3.jpg"
-        ],
-        [
-        "title" => "Wolverine Saga (2009) #7",
-        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
         ],
         [
         "title" => "Official Handbook of the Marvel Universe (2004) #12 (SPIDER-MAN)",
         "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/4bc64020a4ccc.jpg"
         ],
         [
-        "title" => "Halo Chronicles (2009) #1",
-        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
-        ],
-        [
-        "title" => "Marvel Previews (2017)",
-        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
-        ],
-        [
-        "title" => "Marvels Vol. 1 (1994) #1",
-        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
-        ],
-        [
         "title" => "Incredible Hulks (2010) #604 (DJURDJEVIC 70TH ANNIVERSARY VARIANT)",
         "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/d0/4badb223f33c9.jpg"
-        ],
-        [
-        "title" => "Holiday Special (1969) #1",
-        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
         ],
         [
         "title" => "Civil War (Hardcover)",
@@ -245,28 +193,12 @@ class AppProvider
         "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/6/c0/59079911f0fdb.jpg"
         ],
         [
-        "title" => "Marvels Vol. 1 (1994) #8",
-        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
-        ],
-        [
-        "title" => "Amazing Spider-Man 500 Covers Slipcase - Book II (Trade Paperback)",
-        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
-        ],
-        [
         "title" => "Halo Chronicles (2009) #2",
         "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/1/e0/4bb4ecb6aa5a9.jpg"
         ],
         [
         "title" => "Penance: Relentless (2008)",
         "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/9/90/4bb860a46f58d.jpg"
-        ],
-        [
-        "title" => "Marvels Vol. 1 (1994) #3",
-        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
-        ],
-        [
-        "title" => "Silver Surfer (1987)",
-        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
         ],
         [
         "title" => "Gun Theory (2003) #3",
@@ -277,20 +209,8 @@ class AppProvider
         "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/c/60/4bc69f11baf75.jpg"
         ],
         [
-        "title" => "Marvels Vol. 1 (1994) #9",
-        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
-        ],
-        [
         "title" => "Hedge Knight II: Sworn Sword (2007) #1 (Yu Variant)",
         "poster"=> "http://i.annihil.us/u/prod/marvel/i/mg/9/50/4bc49463dad62.jpg"
-        ],
-        [
-        "title" => "Official Marvel Universe Handbook (2009) #2",
-        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
-        ],
-        [
-        "title" => "Marvels Vol. 1 (1994) #4",
-        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
         ],
         [
         "title" => "Sentry, the (Trade Paperback)",
@@ -304,6 +224,101 @@ class AppProvider
         "title" => "X-Men: Days of Future Past (Trade Paperback)",
         "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/9/d0/58b5cfb6d5239.jpg"
         ]
+    ];
+    
+    private $charactersData = [
+        [
+            "name" => "Agent Brand",
+            "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/4/60/52695285d6e7e.jpg"
+        ],
+        [
+            "name" => "Absorbing Man",
+            "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/1/b0/5269678709fb7.jpg"
+        ],
+        [
+            "name" => "Anita Blake",
+            "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/2/a0/4c0038fa14452.jpg"
+        ],
+        [
+        "name" => "Banshee (Theresa Rourke)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/c0/4ce5a1a50e56b.jpg"
+        ],
+        [
+        "name" => "3-D Man",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg"
+        ],
+        [
+        "name" => "Abyss",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/9/30/535feab462a64.jpg"
+        ],
+        [
+        "name" => "Adam Warlock",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/a/f0/5202887448860.jpg"
+        ],
+        [
+        "name" => "Amadeus Cho",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/3/80/520288b9cb581.jpg"
+        ],
+        [
+        "name" => "Abyss (Age of Apocalypse)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/3/80/4c00358ec7548.jpg"
+        ],
+        [
+        "name" => "Battering Ram",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/f/60/4c002e0305708.gif"
+        ],
+        [
+        "name" => "Alex Power",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/9/50/4ce5a385a2e82.jpg"
+        ],
+        [
+        "name" => "Balder",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/f0/4ce5a7c2814ba.gif"
+        ],
+        [
+        "name" => "Arcade",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/2/a0/4c0042091ab69.jpg"
+        ],
+        [
+        "name" => "Angel (Ultimate)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/4/50/531769ae4399f.jpg"
+        ],
+        [
+        "name" => "Alex Wilder",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/2/c0/4c00377144d5a.jpg"
+        ],
+        [
+        "name" => "Abomination (Emil Blonsky)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/9/50/4ce18691cbf04.jpg"
+        ],
+        [
+        "name" => "Banshee",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/03/52740e4619f54.jpg"
+        ],
+        [
+        "name" => "Ajak",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/2/80/4c002f35c5215.jpg"
+        ],
+        [
+        "name" => "Alicia Masters",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/b/40/4c003d40ac7ae.jpg"
+        ],
+        [
+        "name" => "Aqueduct",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/5/50/4c0035b3630cd.jpg"
+        ],
+        [
+        "name" => "Annihilus",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/5/f0/528d31f20a2f6.jpg"
+        ],
+        [
+        "name" => "A-Bomb (HAS)",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16.jpg"
+        ],
+        [
+        "name" => "Alice",
+        "poster" => "http://i.annihil.us/u/prod/marvel/i/mg/6/70/4cd061e6d6573.jpg"
+        ],
     ];
 
     // /**
@@ -325,13 +340,23 @@ class AppProvider
     // }
 
     /**
-     * Get a random Comics with his poster from the provider
+     * Get an array of random Comics with their poster from the provider
      *
      * @return array random Comics with associated poster
      */
     public function comicsInfos()
     {
         return $this->comicsInfos;
+    }
+
+    /**
+     * Get an array of random Characters with their poster from the provider
+     *
+     * @return array of random Characters with associated poster
+     */
+    public function charactersInfos()
+    {
+        return $this->charactersData;
     }
 
     /**
