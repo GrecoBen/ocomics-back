@@ -24,6 +24,7 @@ class ApiComicsController extends AbstractController
 
         return $this->json($comics, Response::HTTP_OK, [], ['groups' => 'comicsWithRelation']);
     }
+    
 
      /**
      * @Route("/api/comics/{id}", name="app_api_comics_show", methods={"GET"})
@@ -37,6 +38,16 @@ class ApiComicsController extends AbstractController
         }
     
         return $this->json($comics, JsonResponse::HTTP_OK, [], ['groups' => 'comicsWithRelation']);
+    }
+
+    /**
+     * @Route("/api/home-comics", name="app_api_comics", methods={"GET"})
+     */
+    public function homeComics(ComicsRepository $comicsRepository): JsonResponse
+    {
+        $comics = $comicsRepository->findNineComics();
+
+        return $this->json($comics, Response::HTTP_OK, [], ['groups' => 'comicsWithRelation']);
     }
 
     /**

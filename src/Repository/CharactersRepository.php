@@ -39,6 +39,17 @@ class CharactersRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+    * @return Characters[] Returns an array of five Characters objects
+    */
+    public function findFiveCharacters($limit = 5)
+    {
+        return $this->createQueryBuilder('c')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Characters[] Returns an array of Characters objects
 //     */
