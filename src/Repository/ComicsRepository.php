@@ -53,6 +53,17 @@ class ComicsRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+    * @return Comics[] Returns an array of nine Comics objects
+    */
+    public function findNineComics($limit = 9)
+    {
+        return $this->createQueryBuilder('c')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Comics[] Returns an array of Comics objects
 //     */

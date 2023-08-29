@@ -24,6 +24,16 @@ class ApiCharacterController extends AbstractController
     }
 
     /**
+     * @Route("/api/home-character", name="app_api_character")
+     */
+    public function homeCharacters(CharactersRepository $charactersRepository): JsonResponse
+    {
+        $characters = $charactersRepository->findFiveCharacters();
+
+        return $this->json($characters, Response::HTTP_OK, [], ['groups' => 'charactersWithRelation']);
+    }
+
+    /**
      * @Route("/api/character/{id}", name="app_api_character_show", methods={"GET"})
      */
     public function showCharacter(int $id, CharactersRepository $charactersRepository): JsonResponse
