@@ -22,17 +22,21 @@ class ApiComicsController extends AbstractController
     {
         $comics = $comicsRepository->findAll();
 
-        return $this->json($comics, Response::HTTP_OK, [], ['groups' => 'comics']);
+        return $this->json($comics, Response::HTTP_OK, [], ['groups' => 'comicsWithRelation']);
     }
 
      /**
      * @Route("/api/comics/{id}", name="app_api_comics_show", methods={"GET"})
      */
-    public function showComics(Comics $comics, SerializerInterface $serializer): JsonResponse
+    public function showComics($id, ComicsRepository $comicsRepository): JsonResponse
     {
-        $json = $serializer->serialize($comics, 'json', ['groups' => 'comics']);
+        $comics = $comicsRepository->find($id);
 
-        return new JsonResponse($json, Response::HTTP_OK, [], true);
+        if (!$comics) {
+            return $this->json(['message' => 'Le comics n\'existe pas'], Response::HTTP_NOT_FOUND);
+        }
+    
+        return $this->json($comics, JsonResponse::HTTP_OK, [], ['groups' => 'comicsWithRelation']);
     }
 
     /**

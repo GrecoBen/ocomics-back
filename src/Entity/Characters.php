@@ -20,42 +20,46 @@ class Characters
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"characters"})
+     * @Groups({"characters", "charactersWithRelation", "comicsWithRelation"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"characters"})
+     * @Groups({"characters", "charactersWithRelation", "comicsWithRelation"})
      */
     private $poster;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"characters"})
+     * @Groups({"characters", "charactersWithRelation", "comicsWithRelation"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"characters"})
+     * @Groups({"characters", "charactersWithRelation", "comicsWithRelation"})
      */
     private $released_at;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Comics::class, mappedBy="characters")
-     */
-    private $comics;
-
-    /**
      * @ORM\Column(type="text")
+     * @Groups({"characters", "charactersWithRelation", "comicsWithRelation"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
+     * @Groups({"characters", "charactersWithRelation", "comicsWithRelation"})
      */
     private $quote;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Comics::class, mappedBy="characters")
+     * @Groups({"charactersWithRelation"})
+     */
+    private $comics;
+
 
     public function __construct()
     {
