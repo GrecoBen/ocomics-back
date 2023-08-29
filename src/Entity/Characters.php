@@ -47,6 +47,16 @@ class Characters
      */
     private $comics;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true)
+     */
+    private $quote;
+
     public function __construct()
     {
         $this->comics = new ArrayCollection();
@@ -116,6 +126,30 @@ class Characters
         if ($this->comics->removeElement($comic)) {
             $comic->removeCharacter($this);
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getQuote(): ?string
+    {
+        return $this->quote;
+    }
+
+    public function setQuote(?string $quote): self
+    {
+        $this->quote = $quote;
 
         return $this;
     }
