@@ -18,48 +18,50 @@ class Comics
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"comics"})
+     * @Groups({"comics","charactersWithRelation","comicsWithRelation"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=128)
-     * @Groups({"comics"})
+     * @Groups({"comics","charactersWithRelation","comicsWithRelation"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"comics"})
+     * @Groups({"comics","charactersWithRelation","comicsWithRelation"})
      */
     private $poster;
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"comics"})
+     * @Groups({"comics","charactersWithRelation","comicsWithRelation"})
      */
     private $released_at;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"comics"})
+     * @Groups({"comics","charactersWithRelation","comicsWithRelation"})
      */
     private $synopsis;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
-     * @Groups({"comics"})
+     * @Groups({"comics","charactersWithRelation","comicsWithRelation"})
      */
     private $rarity;
 
     /**
      * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="comics")
      * @ORM\JoinColumn(nullable=true)
+     * @Groups({"comicsWithRelation"})
      */
     private $author;
 
     /**
      * @ORM\ManyToMany(targetEntity=Characters::class, inversedBy="comics")
+     * @Groups({"comicsWithRelation"})
      */
     private $characters;
 

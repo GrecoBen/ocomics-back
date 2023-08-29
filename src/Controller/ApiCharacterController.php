@@ -16,22 +16,24 @@ class ApiCharacterController extends AbstractController
     /**
      * @Route("/api/character", name="app_api_character")
      */
-    public function listCharacters(CharactersRepository $charactersRepository, SerializerInterface $serializer): JsonResponse
+    public function listCharacters(CharactersRepository $charactersRepository): JsonResponse
     {
         $characters = $charactersRepository->findAll();
 
-        $json = $serializer->serialize($characters, 'json', ['groups' => 'characters']);
-
-        return new JsonResponse($json, Response::HTTP_OK, [], true);
+        return $this->json($characters, Response::HTTP_OK, [], ['groups' => 'charactersWithRelation']);
     }
 
     /**
      * @Route("/api/character/{id}", name="app_api_character_show", methods={"GET"})
      */
-    public function showCharacter(Characters $character, SerializerInterface $serializer): JsonResponse
+    public function showCharacter(int $id, CharactersRepository $charactersRepository): JsonResponse
     {
-        $json = $serializer->serialize($character, 'json', ['groups' => 'characters']);
-
-        return new JsonResponse($json, Response::HTTP_OK, [], true);
+        $character = $charactersRepository->find($id);
+    
+        if (!$character) {
+            return $this->json(['message' => 'Le personnage n\'existe pas'], Response::HTTP_NOT_FOUND);
+        }
+    
+        return $this->json($character, Response::HTTP_OK, [], ['groups' => 'charactersWithRelation']);
     }
 }

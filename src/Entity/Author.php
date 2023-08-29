@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AuthorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,16 +17,19 @@ class Author
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"comicsWithRelation"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Groups({"comicsWithRelation"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Groups({"comicsWithRelation"})
      */
     private $lastname;
 
