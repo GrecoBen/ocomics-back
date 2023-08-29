@@ -57,6 +57,8 @@ class AppFixtures extends Fixture
             $character->setPoster($randomCharacterInfo['poster']);
             $character->setName($randomCharacterInfo['name']);
             $character->setReleasedAt(new \DateTimeImmutable($faker->date()));
+            $character->setDescription($faker->text(600));
+            $character->setQuote($faker->text(75));
             $manager->persist($character);
             $characters[] = $character;
         }
