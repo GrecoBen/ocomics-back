@@ -39,6 +39,20 @@ class ComicsRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @param string|null string to find in comics
+     * @return Comics[] Returns an array of Comics objects
+     */
+    public function findAllOrderByTitleSearch(?string $search = null): array
+    {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.title', 'ASC')
+            ->where('c.title LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Comics[] Returns an array of Comics objects
 //     */
