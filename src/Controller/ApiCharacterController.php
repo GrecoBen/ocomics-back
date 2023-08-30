@@ -24,7 +24,7 @@ class ApiCharacterController extends AbstractController
     }
 
     /**
-     * @Route("/api/home-character", name="app_api_character")
+     * @Route("/api/home-character", name="app_api_character_home")
      */
     public function homeCharacters(CharactersRepository $charactersRepository): JsonResponse
     {
