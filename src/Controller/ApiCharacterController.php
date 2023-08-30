@@ -7,14 +7,13 @@ use App\Repository\CharactersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 class ApiCharacterController extends AbstractController
 {
     /**
-     * @Route("/api/character", name="app_api_character")
+     * @Route("/api/character", name="app_api_character", methods={"GET"})
      */
     public function listCharacters(CharactersRepository $charactersRepository): JsonResponse
     {
@@ -24,7 +23,7 @@ class ApiCharacterController extends AbstractController
     }
 
     /**
-     * @Route("/api/home-character", name="app_api_character_home")
+     * @Route("/api/home-character", name="app_api_character_home", methods={"GET"})
      */
     public function homeCharacters(CharactersRepository $charactersRepository): JsonResponse
     {
