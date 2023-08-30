@@ -10,3 +10,4 @@
 - `php bin/console doctrine:database:create` pour créer la base de données
 - `php bin/console doctrine:migration:migrate` pour exécuter la dernière migration et créer les tables avec les relations adéquates
 - `php bin/console do:fi:lo` pour peupler la base de données avec les fixtures
+- `php bin/console lexik:jwt:generate-keypair` pour générer le token
