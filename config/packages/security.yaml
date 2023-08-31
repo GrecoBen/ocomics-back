@@ -39,11 +39,29 @@ security:
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
-    # access_control:
-    #     - { path: ^/api/login, roles: PUBLIC_ACCESS }
-    #     - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+#     Easy way to control access for large sections of your site
+#     Note: Only the *first* access control that matches will be used
+#     access_control:
+#         - { path: ^/api/wish-list/remove/\d+, roles: ROLE_USER }
+#         - { path: ^/api/own-list/remove/\d+, roles: ROLE_USER }
+#         - { path: ^/api/wish-list/add/\d+, roles: ROLE_USER }
+#         - { path: ^/api/own-list/add/\d+, roles: ROLE_USER }
+#         - { path: ^/api/wish-list, roles: ROLE_USER }
+#         - { path: ^/api/own-list, roles: ROLE_USER }
+#         - { path: ^/api/character/\d+, roles: PUBLIC_ACCESS }
+#         - { path: ^/api/home-character, roles: PUBLIC_ACCESS }
+#         - { path: ^/api/character/\d+, roles: PUBLIC_ACCESS }
+#         - { path: ^/api/character, roles: PUBLIC_ACCESS }
+#         - { path: ^/api/comics/\d+, roles: PUBLIC_ACCESS }
+#         - { path: ^/api/home-comics, roles: PUBLIC_ACCESS }
+#         - { path: ^/api/search-comics, roles: PUBLIC_ACCESS }
+#         - { path: ^/api/comics, roles: PUBLIC_ACCESS }
+#         - { path: ^/api/login, roles: PUBLIC_ACCESS }
+
+
+# role_hierarchy:
+#     ROLE_ADMIN: ROLE_USER
+
 
 when@test:
     security:
