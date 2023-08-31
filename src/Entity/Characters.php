@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 
 /**
@@ -27,32 +29,39 @@ class Characters
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"characters", "charactersWithRelation", "comicsWithRelation"})
+     * @Assert\NotBlank
+     * @Assert\Url
      */
     private $poster;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
      * @Groups({"characters", "charactersWithRelation", "comicsWithRelation"})
+     * @Assert\Length(max=64)
      */
     private $name;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      * @Groups({"characters", "charactersWithRelation", "comicsWithRelation"})
+     * @Assert\NotBlank
      */
     private $released_at;
 
     /**
      * @ORM\Column(type="text")
      * @Groups({"characters", "charactersWithRelation", "comicsWithRelation"})
+     * @Assert\NotBlank
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
      * @Groups({"characters", "charactersWithRelation", "comicsWithRelation"})
+     * @Assert\Length(max=500)
      */
     private $quote;
+
 
     /**
      * @ORM\ManyToMany(targetEntity=Comics::class, mappedBy="characters")

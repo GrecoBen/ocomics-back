@@ -8,6 +8,7 @@ use App\Repository\ComicsRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ComicsRepository::class)
@@ -22,33 +23,38 @@ class Comics
      */
     private $id;
 
-    /**
+     /**
      * @ORM\Column(type="string", length=128)
-     * @Groups({"comics","charactersWithRelation","comicsWithRelation"})
+     * @Groups({"comics", "charactersWithRelation", "comicsWithRelation"})
+     * @Assert\NotBlank
+     * @Assert\Length(max=128)
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"comics","charactersWithRelation","comicsWithRelation"})
+     * @Groups({"comics", "charactersWithRelation", "comicsWithRelation"})
+     * @Assert\NotBlank
+     * @Assert\Url
      */
     private $poster;
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"comics","charactersWithRelation","comicsWithRelation"})
+     * @Groups({"comics", "charactersWithRelation", "comicsWithRelation"})
+     * @Assert\NotBlank
      */
     private $released_at;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"comics","charactersWithRelation","comicsWithRelation"})
+     * @Groups({"comics", "charactersWithRelation", "comicsWithRelation"})
      */
     private $synopsis;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
-     * @Groups({"comics","charactersWithRelation","comicsWithRelation"})
+     * @Groups({"comics", "charactersWithRelation", "comicsWithRelation"})
      */
     private $rarity;
 
