@@ -57,7 +57,9 @@ class ImportCharacterCommand extends Command
             $character->setName($characterData['name']);
 
             $thumbnailUrl = $characterData['thumbnail']['path'] . '.' . $characterData['thumbnail']['extension'];
-            $character->setAlias($thumbnailUrl);
+            $character->setPoster($thumbnailUrl);
+            $character->setDescription($characterData['description']);
+
 
             // Generate a random release date
             $randomTimestamp = mt_rand(strtotime('-10 years'), time());
