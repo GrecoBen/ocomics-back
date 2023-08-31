@@ -28,9 +28,9 @@ class ApiComicsController extends AbstractController
 
         return $this->json($comics, Response::HTTP_OK, [], ['groups' => 'comicsWithRelation']);
     }
-    
 
-     /**
+
+    /**
      * @Route("/api/comics/{id}", name="app_api_comics_show", methods={"GET"})
      */
     public function showComics($id, ComicsRepository $comicsRepository): JsonResponse
@@ -40,7 +40,7 @@ class ApiComicsController extends AbstractController
         if (!$comics) {
             return $this->json(['message' => 'Le comics n\'existe pas'], Response::HTTP_NOT_FOUND);
         }
-    
+
         return $this->json($comics, JsonResponse::HTTP_OK, [], ['groups' => 'comicsWithRelation']);
     }
 
@@ -59,7 +59,7 @@ class ApiComicsController extends AbstractController
      */
     public function searchComics(Request $request, ComicsRepository $comicsRepository): JsonResponse
     {
-         // Retrieve the title of the comics
+        // Retrieve the title of the comics
         $title = $request->query->get('title');
 
         // Use the custom query in order to do the search by title
@@ -81,7 +81,8 @@ class ApiComicsController extends AbstractController
     }
 
     /**
-     * @Route("/api/comics", name="app_api_comics_post", methods={"POST"})
+     * Creation of a new comics
+     * @Route("/api/admin/comics/add", name="app_api_admin_comics_add", methods={"POST"})
      */
     public function postComics(Request $request, SerializerInterface $serializer, ValidatorInterface $validator, EntityManagerInterface $entityManager): JsonResponse
     {
@@ -95,7 +96,7 @@ class ApiComicsController extends AbstractController
             // in case the Json response is invalid
             return $this->json(["error" => "Le JSON n'est pas valide"], Response::HTTP_BAD_REQUEST);
         }
-        
+
         // we check if there is any error in our entity 
         $errors = $validator->validate($comics);
 
@@ -125,5 +126,63 @@ class ApiComicsController extends AbstractController
         ], [
             "groups" => "comicsWithRelation"
         ]);
+    }
+
+    /**
+     * Update a comics
+     * @Route("/api/admin/comics/{id}/update", name="app_api_admin_comics_update", methods={"PUT"})
+     */
+    public function updateComics($id, Request $request, ComicsRepository $comicsRepository, SerializerInterface $serializer, ValidatorInterface $validator, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $comics = $comicsRepository->find($id);
+
+        // If there is no comics with this id, with return a JSON with an error message
+        if (!$comics) {
+            return $this->json(['message' => 'Le comics n\'existe pas'], Response::HTTP_NOT_FOUND);
+        }
+
+        // Retrieve the raw JSON
+        $jsonContent = $request->getContent();
+
+        // Deserialize the JSON into the existing Comics object
+        try {
+            $serializer->deserialize($jsonContent, Comics::class, 'json', ['object_to_populate' => $comics]);
+        } catch (NotEncodableValueException $e) {
+            return $this->json(["error" => "Le JSON n'est pas valide"], Response::HTTP_BAD_REQUEST);
+        }
+
+        // we validate the updated Comics object
+        $errors = $validator->validate($comics);
+        if (count($errors) > 0) {
+            $dataErrors = [];
+            foreach ($errors as $error) {
+                $dataErrors[$error->getPropertyPath()][] = $error->getMessage();
+            }
+            return $this->json($dataErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        // we use the EntityManager to update the comics
+        $entityManager->flush();
+
+        return $this->json($comics, Response::HTTP_OK, [], ['groups' => 'comicsWithRelation']);
+    }
+
+    /**
+     * Delete a comics
+     * @Route("/api/admin/comics/{id}/delete", name="app_api_admin_comics_delete", methods={"DELETE"})
+     */
+    public function deleteComics($id, ComicsRepository $comicsRepository, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $comics = $comicsRepository->find($id);
+
+        if (!$comics) {
+            return $this->json(['message' => 'Le comics n\'existe pas'], Response::HTTP_NOT_FOUND);
+        }
+
+        // we use the EntityManager to remove the comics
+        $entityManager->remove($comics);
+        $entityManager->flush();
+
+        return $this->json(['message' => 'Le comics a été supprimé avec succès'], Response::HTTP_OK);
     }
 }
