@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -20,6 +21,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"wishlist"})
      */
     private $id;
 
@@ -27,6 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank
      * @Assert\Email
+     * @Groups({"wishlist"})
      */
     private $email;
 
@@ -66,8 +69,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $userCollection;
 
     /**
- * @ORM\OneToMany(targetEntity=UserCollection::class, mappedBy="user", cascade={"persist", "remove"})
- */
+     * @ORM\OneToMany(targetEntity=UserCollection::class, mappedBy="user", cascade={"persist", "remove"})
+     */
     private $userCollections;
 
     public function __construct()
