@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\UserCollection;
-use App\Entity\wishCollection;
+use App\Entity\WishCollection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ComicsRepository;
 use Doctrine\Common\Collections\Collection;

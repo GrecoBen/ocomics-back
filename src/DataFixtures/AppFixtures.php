@@ -8,7 +8,7 @@ use App\Entity\Author;
 use App\Entity\Comics;
 use App\Entity\Characters;
 use App\Entity\UserCollection;
-use App\Entity\wishCollection;
+use App\Entity\WishCollection;
 use Doctrine\Persistence\ObjectManager;
 use App\DataFixtures\Provider\AppProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
