@@ -19,10 +19,6 @@ class OwnedCollection
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="smallint")
-     */
-    private $status;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="ownedCollection", cascade={"persist", "remove"})
@@ -42,18 +38,6 @@ class OwnedCollection
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getStatus(): ?int
-    {
-        return $this->status;
-    }
-
-    public function setStatus(int $status): self
-    {
-        $this->status = $status;
-
-        return $this;
     }
 
     public function getUser(): ?User

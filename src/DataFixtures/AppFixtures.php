@@ -36,7 +36,6 @@ class AppFixtures extends Fixture
         // Initialition of three arrays, to store comics and users object in an array for the user_collection_comics fixture
         $comicsArray = []; 
         $usersArray = []; 
-        $userCollectionUsers = []; 
 
         //! Author
         // Create several Authors that will br link to a Comics
@@ -114,7 +113,6 @@ class AppFixtures extends Fixture
 
         for ($m = 0; $m < 6; $m++) {
             $userCollection = new UserCollection();
-            $userCollection->setStatus($faker->randomElement([0, 1, 2]));
 
             // Link the comics and the UserCollection
             $randomComic = $comicsArray[array_rand($comicsArray)];
@@ -125,13 +123,11 @@ class AppFixtures extends Fixture
             $userCollection->setUser($randomUser);
 
             $manager->persist($userCollection);
-            $userCollectionUsers[] = $randomUser;
         }
         //! OwnedCollection
 
         for ($n = 0; $n < 6; $n++) {
             $ownedCollection = new OwnedCollection();
-            $ownedCollection->setStatus($faker->randomElement([0, 1, 2]));
 
             // Link the comics and the ownedCollection
             $randomComic = $comicsArray[array_rand($comicsArray)];
@@ -142,7 +138,6 @@ class AppFixtures extends Fixture
             $ownedCollection->setUser($randomUser);
 
             $manager->persist($ownedCollection);
-            $ownedCollectionUsers[] = $randomUser;
         }
         $manager->flush();
     }

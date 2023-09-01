@@ -22,12 +22,6 @@ class UserCollection
     private $id;
 
     /**
-     * @ORM\Column(type="smallint")
-     * @Groups({"wishlist"})
-     */
-    private $status;
-
-    /**
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="userCollection", cascade={"persist", "remove"})
      * @Groups({"wishlist"})
      */
@@ -74,18 +68,6 @@ class UserCollection
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getStatus(): ?int
-    {
-        return $this->status;
-    }
-
-    public function setStatus(int $status): self
-    {
-        $this->status = $status;
-
-        return $this;
     }
 
     public function getUser(): ?User
