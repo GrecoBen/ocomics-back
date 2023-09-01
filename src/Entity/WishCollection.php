@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\OwnedCollectionRepository;
+use App\Repository\WishCollectionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=OwnedCollectionRepository::class)
+ * @ORM\Entity(repositoryClass=WishCollectionRepository::class)
  */
-class OwnedCollection
+class WishCollection
 {
     /**
      * @ORM\Id
@@ -21,12 +21,12 @@ class OwnedCollection
 
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="ownedCollection", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="wishCollection", cascade={"persist", "remove"})
      */
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Comics::class, inversedBy="ownedCollections")
+     * @ORM\ManyToMany(targetEntity=Comics::class, inversedBy="wishCollections")
      */
     private $comics;
 

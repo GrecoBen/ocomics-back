@@ -74,9 +74,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $userCollections;
 
     /**
-     * @ORM\OneToOne(targetEntity=OwnedCollection::class, mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=WishCollection::class, mappedBy="user", cascade={"persist", "remove"})
      */
-    private $ownedCollection;
+    private $wishCollection;
 
     public function __construct()
     {
@@ -233,24 +233,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getOwnedCollection(): ?OwnedCollection
+    public function getWishCollection(): ?WishCollection
     {
-        return $this->ownedCollection;
+        return $this->wishCollection;
     }
 
-    public function setOwnedCollection(?OwnedCollection $ownedCollection): self
+    public function setWishCollection(?WishCollection $wishCollection): self
     {
         // unset the owning side of the relation if necessary
-        if ($ownedCollection === null && $this->ownedCollection !== null) {
-            $this->ownedCollection->setUser(null);
+        if ($wishCollection === null && $this->wishCollection !== null) {
+            $this->wishCollection->setUser(null);
         }
 
         // set the owning side of the relation if necessary
-        if ($ownedCollection !== null && $ownedCollection->getUser() !== $this) {
-            $ownedCollection->setUser($this);
+        if ($wishCollection !== null && $wishCollection->getUser() !== $this) {
+            $wishCollection->setUser($this);
         }
 
-        $this->ownedCollection = $ownedCollection;
+        $this->wishCollection = $wishCollection;
 
         return $this;
     }

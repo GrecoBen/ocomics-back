@@ -8,7 +8,7 @@ use App\Entity\Author;
 use App\Entity\Comics;
 use App\Entity\Characters;
 use App\Entity\UserCollection;
-use App\Entity\OwnedCollection;
+use App\Entity\wishCollection;
 use Doctrine\Persistence\ObjectManager;
 use App\DataFixtures\Provider\AppProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -129,25 +129,25 @@ class AppFixtures extends Fixture
 
             $manager->persist($userCollection);
         }
-        //! OwnedCollection
+        //! wishCollection
 
         for ($n = 0; $n < 6; $n++) {
-            $ownedCollection = new OwnedCollection();
+            $wishCollection = new WishCollection();
 
             // Determine the random number of comics to add (between 0 and 5)
             $numComicsToAdd = mt_rand(0, 5);
 
-            // Add the specified number of comics to the OwnedCollection
+            // Add the specified number of comics to the wishCollection
             for ($i = 0; $i < $numComicsToAdd; $i++) {
                 $randomComic = $comicsArray[array_rand($comicsArray)];
-                $ownedCollection->addComics($randomComic);
+                $wishCollection->addComics($randomComic);
             }
 
-            // Link the user and the ownedCollection
+            // Link the user and the wishCollection
             $randomUser = $usersArray[$n];
-            $ownedCollection->setUser($randomUser);
+            $wishCollection->setUser($randomUser);
 
-            $manager->persist($ownedCollection);
+            $manager->persist($wishCollection);
         }
         $manager->flush();
     }
