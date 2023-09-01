@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\OwnedCollection;
+use App\Entity\WishCollection;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<OwnedCollection>
+ * @extends ServiceEntityRepository<WishCollection>
  *
- * @method OwnedCollection|null find($id, $lockMode = null, $lockVersion = null)
- * @method OwnedCollection|null findOneBy(array $criteria, array $orderBy = null)
- * @method OwnedCollection[]    findAll()
- * @method OwnedCollection[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method WishCollection|null find($id, $lockMode = null, $lockVersion = null)
+ * @method WishCollection|null findOneBy(array $criteria, array $orderBy = null)
+ * @method WishCollection[]    findAll()
+ * @method WishCollection[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class OwnedCollectionRepository extends ServiceEntityRepository
+class WishCollectionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, OwnedCollection::class);
+        parent::__construct($registry, WishCollection::class);
     }
 
-    public function add(OwnedCollection $entity, bool $flush = false): void
+    public function add(WishCollection $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class OwnedCollectionRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(OwnedCollection $entity, bool $flush = false): void
+    public function remove(WishCollection $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class OwnedCollectionRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return OwnedCollection[] Returns an array of OwnedCollection objects
+//     * @return WishCollection[] Returns an array of WishCollection objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class OwnedCollectionRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?OwnedCollection
+//    public function findOneBySomeField($value): ?WishCollection
 //    {
 //        return $this->createQueryBuilder('o')
 //            ->andWhere('o.exampleField = :val')

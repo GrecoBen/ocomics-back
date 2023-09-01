@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\UserCollection;
-use App\Entity\OwnedCollection;
+use App\Entity\WishCollection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ComicsRepository;
 use Doctrine\Common\Collections\Collection;
@@ -20,13 +20,13 @@ class Comics
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"comics","charactersWithRelation","comicsWithRelation", "wishlist"})
+     * @Groups({"comics","charactersWithRelation","comicsWithRelation", "wishlist",  "ownedlist"})
      */
     private $id;
 
      /**
      * @ORM\Column(type="string", length=128)
-     * @Groups({"comics", "charactersWithRelation", "comicsWithRelation","wishlist"})
+     * @Groups({"comics", "charactersWithRelation", "comicsWithRelation","wishlist", "ownedlist"})
      * @Assert\NotBlank
      * @Assert\Length(max=128)
      */
@@ -34,7 +34,7 @@ class Comics
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"comics", "charactersWithRelation", "comicsWithRelation","wishlist"})
+     * @Groups({"comics", "charactersWithRelation", "comicsWithRelation","wishlist", "ownedlist"})
      * @Assert\NotBlank
      * @Assert\Url
      */
@@ -78,16 +78,16 @@ class Comics
     private $userCollections;
 
     /**
-     * @ORM\ManyToMany(targetEntity=OwnedCollection::class, mappedBy="comics")
+     * @ORM\ManyToMany(targetEntity=WishCollection::class, mappedBy="comics")
      */
-    private $ownedCollections;
+    private $wishCollections;
 
 
     public function __construct()
     {
         $this->characters = new ArrayCollection();
         $this->userCollections = new ArrayCollection();
-        $this->ownedCollections = new ArrayCollection();
+        $this->wishCollections = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -219,27 +219,27 @@ class Comics
     }
 
     /**
-     * @return Collection<int, OwnedCollection>
+     * @return Collection<int, WishCollection>
      */
-    public function getOwnedCollections(): Collection
+    public function getWishCollections(): Collection
     {
-        return $this->ownedCollections;
+        return $this->wishCollections;
     }
 
-    public function addOwnedCollection(OwnedCollection $ownedCollection): self
+    public function addWishCollection(WishCollection $wishCollection): self
     {
-        if (!$this->ownedCollections->contains($ownedCollection)) {
-            $this->ownedCollections[] = $ownedCollection;
-            $ownedCollection->addComics($this);
+        if (!$this->wishCollections->contains($wishCollection)) {
+            $this->wishCollections[] = $wishCollection;
+            $wishCollection->addComics($this);
         }
 
         return $this;
     }
 
-    public function removeOwnedCollection(OwnedCollection $ownedCollection): self
+    public function removewishCollection(wishCollection $wishCollection): self
     {
-        if ($this->ownedCollections->removeElement($ownedCollection)) {
-            $ownedCollection->removeComics($this);
+        if ($this->wishCollections->removeElement($wishCollection)) {
+            $wishCollection->removeComics($this);
         }
 
         return $this;

@@ -17,19 +17,19 @@ class UserCollection
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"wishlist"})
+     * @Groups({"ownedlist"})
      */
     private $id;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="userCollection", cascade={"persist", "remove"})
-     * @Groups({"wishlist"})
+     * @Groups({"ownedlist"})
      */
     private $user;
 
     /**
      * @ORM\ManyToMany(targetEntity=Comics::class, inversedBy="userCollections")
-     * @Groups({"wishlist"})
+     * @Groups({"ownedlist"})
      */
     private $comics;
 

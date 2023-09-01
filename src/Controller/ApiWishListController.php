@@ -3,37 +3,26 @@
 namespace App\Controller;
 
 use App\Entity\Comics;
-use App\Repository\UserCollectionRepository;
+use App\Repository\WishCollectionRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ApiWishListController extends AbstractController
 {
-
     /**
-     * Show the user wishlist
+     * Show the wish collection (wishlist)
      * @Route("/api/wishlist", name="api_wishlist", methods={"GET"})
      */
-    public function getWishlist(UserCollectionRepository $userCollectionRepository, SerializerInterface $serializer)
+    public function getWishList(WishCollectionRepository $wishCollectionRepository): JsonResponse
     {
         // Récupérez l'utilisateur connecté
         $user = $this->getUser();
         
-        // Récupérez la wishlist de l'utilisateur avec le statut 1 (wishlist)
-        $wishlist = $userCollectionRepository->findBy(['user' => $user, 'status' => 1]);
+        // Récupérez la wishlist de l'utilisateur 
+        $wishlist = $wishCollectionRepository->findBy(['user' => $user]);
     
-        // Créez un tableau pour stocker les données des comics dans la wishlist
-        $wishlistData = [];
-    
-        // Parcourez les collections de l'utilisateur et ajoutez les données des comics au tableau
-        foreach ($wishlist as $collection) {
-            foreach ($collection->getComics() as $comic) {
-                $wishlistData[] = $comic;
-            }
-        }
         return $this->json($wishlist, JsonResponse::HTTP_OK, [], ['groups' => 'wishlist']);
     }
 
