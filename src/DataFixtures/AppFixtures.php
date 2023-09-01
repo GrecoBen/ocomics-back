@@ -8,6 +8,7 @@ use App\Entity\Author;
 use App\Entity\Comics;
 use App\Entity\Characters;
 use App\Entity\UserCollection;
+use App\Entity\OwnedCollection;
 use Doctrine\Persistence\ObjectManager;
 use App\DataFixtures\Provider\AppProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -125,6 +126,23 @@ class AppFixtures extends Fixture
 
             $manager->persist($userCollection);
             $userCollectionUsers[] = $randomUser;
+        }
+        //! OwnedCollection
+
+        for ($n = 0; $n < 6; $n++) {
+            $ownedCollection = new OwnedCollection();
+            $ownedCollection->setStatus($faker->randomElement([0, 1, 2]));
+
+            // Link the comics and the ownedCollection
+            $randomComic = $comicsArray[array_rand($comicsArray)];
+            $ownedCollection->addComics($randomComic);
+
+            // Link the user and the ownedCollection
+            $randomUser = $usersArray[$n]; 
+            $ownedCollection->setUser($randomUser);
+
+            $manager->persist($ownedCollection);
+            $ownedCollectionUsers[] = $randomUser;
         }
         $manager->flush();
     }

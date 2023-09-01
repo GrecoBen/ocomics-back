@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\UserCollection;
+use App\Entity\OwnedCollection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ComicsRepository;
 use Doctrine\Common\Collections\Collection;
@@ -76,11 +77,17 @@ class Comics
      */
     private $userCollections;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=OwnedCollection::class, mappedBy="comics")
+     */
+    private $ownedCollections;
+
 
     public function __construct()
     {
         $this->characters = new ArrayCollection();
         $this->userCollections = new ArrayCollection();
+        $this->ownedCollections = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -206,6 +213,33 @@ class Comics
     {
         if ($this->userCollections->removeElement($userCollection)) {
             $userCollection->removeComics($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OwnedCollection>
+     */
+    public function getOwnedCollections(): Collection
+    {
+        return $this->ownedCollections;
+    }
+
+    public function addOwnedCollection(OwnedCollection $ownedCollection): self
+    {
+        if (!$this->ownedCollections->contains($ownedCollection)) {
+            $this->ownedCollections[] = $ownedCollection;
+            $ownedCollection->addComics($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOwnedCollection(OwnedCollection $ownedCollection): self
+    {
+        if ($this->ownedCollections->removeElement($ownedCollection)) {
+            $ownedCollection->removeComics($this);
         }
 
         return $this;
