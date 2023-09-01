@@ -38,13 +38,13 @@ class ImportComicsCommand extends Command
 
         // Generate the URL for comics information
         $url = $this->urlGenerator->generateComicsUrl();
-        
+
         // Create an HTTP client instance
         $httpClient = HttpClient::create();
-        
+
         // Send a GET request to the generated URL
         $response = $httpClient->request('GET', $url);
-        
+
         // Convert the JSON response to an array
         $data = $response->toArray();
 
@@ -56,22 +56,27 @@ class ImportComicsCommand extends Command
             $comic = new Comics();
             $comic->setTitle($comicData['title']);
 
+            if (isset($comicData['description'])) {
+                $comic->setSynopsis($comicData['description']);
+            }
+            // Check if there is a thumbnail for the comic
+            if (isset($comicData['thumbnail']['path']) && isset($comicData['thumbnail']['extension'])) {
+                $thumbnailUrl = $comicData['thumbnail']['path'] . '.' . $comicData['thumbnail']['extension'];
 
-        if (isset($comicData['description'])) {
-            $comic->setSynopsis($comicData['description']);
+                // Check if the thumbnail URL does not end with "image_not_available.jpg"
+                if (!preg_match('/image_not_available\.jpg$/', $thumbnailUrl)) {
+                    $comic->setPoster($thumbnailUrl);
+
+                    // Generate a random release date
+                    $randomTimestamp = mt_rand(strtotime('-10 years'), time());
+                    $randomDate = DateTimeImmutable::createFromFormat('U', $randomTimestamp);
+                    $comic->setReleasedAt($randomDate);
+
+                    // Persist the comic entity
+                    $this->entityManager->persist($comic);
+                }
+            }
         }
-            // Build the URL for the comic's thumbnail
-            $thumbnailUrl = $comicData['thumbnail']['path'] . '.' . $comicData['thumbnail']['extension'];
-            $comic->setPoster($thumbnailUrl);
-
-            // Generate a random release date
-            $randomTimestamp = mt_rand(strtotime('-10 years'), time());
-            $randomDate = DateTimeImmutable::createFromFormat('U', $randomTimestamp);
-            $comic->setReleasedAt($randomDate);
-
-            // Persist the comic entity
-            $this->entityManager->persist($comic);
-        }        
 
         // Execute the database operations
         $this->entityManager->flush();
