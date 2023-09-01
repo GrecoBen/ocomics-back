@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Comics;
-use App\Repository\UserCollectionRepository;
+use App\Repository\WishCollectionRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,16 +12,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ApiWishListController extends AbstractController
 {
     /**
-     * Show the user collection (ownedlist)
+     * Show the wish collection (wishlist)
      * @Route("/api/wishlist", name="api_wishlist", methods={"GET"})
      */
-    public function getOwnedList(UserCollectionRepository $userCollectionRepository): JsonResponse
+    public function getWishList(WishCollectionRepository $wishCollectionRepository): JsonResponse
     {
         // Récupérez l'utilisateur connecté
         $user = $this->getUser();
         
         // Récupérez la wishlist de l'utilisateur 
-        $wishlist = $userCollectionRepository->findBy(['user' => $user]);
+        $wishlist = $wishCollectionRepository->findBy(['user' => $user]);
     
         return $this->json($wishlist, JsonResponse::HTTP_OK, [], ['groups' => 'wishlist']);
     }

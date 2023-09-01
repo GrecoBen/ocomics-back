@@ -4,18 +4,28 @@ namespace App\Controller;
 
 use App\Entity\Comics;
 use App\Repository\ComicsRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\UserCollectionRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ApiOwnListController extends AbstractController
 {
     /**
-     * @Route("/api/own-list", name="api_own_list")
+     * Show the user collection (ownedlist)
+     * @Route("/api/ownedlist", name="api_ownedlist", methods={"GET"})
      */
-    public function index(): Response
+    public function getOwnedList(UserCollectionRepository $userCollectionRepository): JsonResponse
     {
-        return $this->json(['message' => 'Welcome to the "je possède" list API']);    }
+        // Récupérez l'utilisateur connecté
+        $user = $this->getUser();
+        
+        // Récupérez la wishlist de l'utilisateur 
+        $wishlist = $userCollectionRepository->findBy(['user' => $user]);
+    
+        return $this->json($wishlist, JsonResponse::HTTP_OK, [], ['groups' => 'ownedlist']);
+    }
 
     /**
      * Add a comic to the "je possède" list

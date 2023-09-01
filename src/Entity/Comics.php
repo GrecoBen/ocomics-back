@@ -20,13 +20,13 @@ class Comics
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"comics","charactersWithRelation","comicsWithRelation", "wishlist"})
+     * @Groups({"comics","charactersWithRelation","comicsWithRelation", "wishlist",  "ownedlist"})
      */
     private $id;
 
      /**
      * @ORM\Column(type="string", length=128)
-     * @Groups({"comics", "charactersWithRelation", "comicsWithRelation","wishlist"})
+     * @Groups({"comics", "charactersWithRelation", "comicsWithRelation","wishlist", "ownedlist"})
      * @Assert\NotBlank
      * @Assert\Length(max=128)
      */
@@ -34,7 +34,7 @@ class Comics
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"comics", "charactersWithRelation", "comicsWithRelation","wishlist"})
+     * @Groups({"comics", "charactersWithRelation", "comicsWithRelation","wishlist", "ownedlist"})
      * @Assert\NotBlank
      * @Assert\Url
      */

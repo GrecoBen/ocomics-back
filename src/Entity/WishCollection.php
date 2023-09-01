@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use App\Repository\WishCollectionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=WishCollectionRepository::class)
@@ -16,17 +17,20 @@ class WishCollection
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"wishlist"})
      */
     private $id;
 
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="wishCollection", cascade={"persist", "remove"})
+     * @Groups({"wishlist"})
      */
     private $user;
 
     /**
      * @ORM\ManyToMany(targetEntity=Comics::class, inversedBy="wishCollections")
+     * @Groups({"wishlist"})
      */
     private $comics;
 
