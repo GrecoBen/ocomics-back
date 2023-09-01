@@ -20,7 +20,7 @@ class AppFixtures extends Fixture
 
     //Dependency injection
     private $passwordHasher;
-    
+
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
         $this->passwordHasher = $passwordHasher;
@@ -34,12 +34,12 @@ class AppFixtures extends Fixture
         $faker->addProvider(new AppProvider());
 
         // Initialition of three arrays, to store comics and users object in an array for the user_collection_comics fixture
-        $comicsArray = []; 
-        $usersArray = []; 
+        $comicsArray = [];
+        $usersArray = [];
 
         //! Author
         // Create several Authors that will br link to a Comics
-        for ($j= 0; $j < 20; $j++) {
+        for ($j = 0; $j < 20; $j++) {
             $author = new Author();
             $author->setFirstname($faker->firstName);
             $author->setLastname($faker->lastName);
@@ -49,7 +49,7 @@ class AppFixtures extends Fixture
 
         //! Characters
         //Create several characters that will be link to a Comics
-        for ($k=0; $k < 20; $k++) {
+        for ($k = 0; $k < 20; $k++) {
             $character = new Characters();
 
             $randomCharacterInfo = $faker->randomElement($faker->charactersInfos());
@@ -85,7 +85,7 @@ class AppFixtures extends Fixture
             $comics->addCharacter($randomCharacter);
             $manager->persist($comics);
             // insert the comics object in the array
-            $comicsArray[] = $comics; 
+            $comicsArray[] = $comics;
         }
 
         //! USER
@@ -103,7 +103,7 @@ class AppFixtures extends Fixture
             $user->setLastname($faker->lastName);
             // In order to set the password, we need to use the passwordHasher initialize threw the constructor and hash it. security.yaml is provided by symfony with a password hasher method
             $user->setPassword($this->passwordHasher->hashPassword($user, $dataUser["password"]));
-        
+
             $manager->persist($user);
             // insert the user object in the array
             $usersArray[] = $user;
@@ -114,12 +114,17 @@ class AppFixtures extends Fixture
         for ($m = 0; $m < 6; $m++) {
             $userCollection = new UserCollection();
 
-            // Link the comics and the UserCollection
-            $randomComic = $comicsArray[array_rand($comicsArray)];
-            $userCollection->addComics($randomComic);
+            // Determine the random number of comics to add (between 0 and 5)
+            $numComicsToAdd = mt_rand(0, 5);
+
+            // Add the specified number of comics to the UserCollection
+            for ($i = 0; $i < $numComicsToAdd; $i++) {
+                $randomComic = $comicsArray[array_rand($comicsArray)];
+                $userCollection->addComics($randomComic);
+            }
 
             // Link the user and the UserCollection
-            $randomUser = $usersArray[$m]; 
+            $randomUser = $usersArray[$m];
             $userCollection->setUser($randomUser);
 
             $manager->persist($userCollection);
@@ -129,12 +134,17 @@ class AppFixtures extends Fixture
         for ($n = 0; $n < 6; $n++) {
             $ownedCollection = new OwnedCollection();
 
-            // Link the comics and the ownedCollection
-            $randomComic = $comicsArray[array_rand($comicsArray)];
-            $ownedCollection->addComics($randomComic);
+            // Determine the random number of comics to add (between 0 and 5)
+            $numComicsToAdd = mt_rand(0, 5);
+
+            // Add the specified number of comics to the OwnedCollection
+            for ($i = 0; $i < $numComicsToAdd; $i++) {
+                $randomComic = $comicsArray[array_rand($comicsArray)];
+                $ownedCollection->addComics($randomComic);
+            }
 
             // Link the user and the ownedCollection
-            $randomUser = $usersArray[$n]; 
+            $randomUser = $usersArray[$n];
             $ownedCollection->setUser($randomUser);
 
             $manager->persist($ownedCollection);
