@@ -63,8 +63,8 @@ security:
         - { path: ^/api/admin, roles: ROLE_ADMIN, methods: PUT }
 
 
-# role_hierarchy:
-#     ROLE_ADMIN: ROLE_USER
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
 
 
 when@test:
