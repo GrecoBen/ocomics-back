@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Comics
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="main-box clearfix">
+					<div class="table-responsive">
+						<table class="table user-list">
+							<a href="{{path('app_admin_comics_add')}}" class="badge bg-warning fs-6 my-2 mx-2 text-decoration-none">Ajouter un comics</a>
+							<thead>
+								<tr>
+									<th>
+										<span>Titre</span>
+									</th>
+									<th>
+										<span>Poster</span>
+									</th>
+									<th>
+										<span>Date de sortie</span>
+									</th>
+									<th>
+										<span>Auteur</span>
+									</th>
+									<th>
+										<span>Action</span>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for comics in allComics %}
+									<tr>
+										<td>
+											<span>{{ comics.title }}</span>
+										</td>
+										<td>
+											<span>{{ comics.poster }}</span>
+										</td>
+										<td>
+											<span>{{ comics.releasedAt|date('d/m/Y') }}</span>
+										</td>
+										<td>
+											<span>{{ comics.author.firstName }} {{ comics.author.lastName }}</span>
+										</td>
+										
+										<td style="width: 15%;">
+											<a href="http://localhost:5173/" class="link-success">
+												<span class="fa-stack">
+													<i class="fa fa-square fa-stack-2x"></i>
+													<i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+												</span>
+											</a>
+											<a href="{{path('app_admin_comics_edit',{id:comics.id})}}" class="link-warning">
+												<span class="fa-stack">
+													<i class="fa fa-square fa-stack-2x"></i>
+													<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+												</span>
+											</a>
+											<a href="{{ path('app_admin_comics_delete', {id:comics.id}) }}" class="link-danger" onclick="return confirm('Voulez-vous vraiment supprimer ce comics?');">
+												<span class="fa-stack">
+													<i class="fa fa-square fa-stack-2x"></i>
+													<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+												</span>
+											</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
