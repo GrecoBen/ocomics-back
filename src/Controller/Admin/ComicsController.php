@@ -29,14 +29,11 @@ class ComicsController extends AbstractController
      * @Route("/admin/comics/{id}", name="app_admin_comics_show", requirements={"id"="\d+"})
      * Homepage, display the selected comics
      */
-    public function show($id, ComicsRepository $comicsRepository): Response
+    public function show(Comics $comics): Response
     {
-        $comics = $comicsRepository->find($id); // Utilisez la méthode "find" pour récupérer par ID
-        if (!$comics) {
-            throw $this->createNotFoundException('Comic non trouvé'); // Gérer le cas où le comic n'a pas été trouvé
-        }
-
-        return $this->redirect('http://localhost:5173/');
+        return $this->render('admin/comics/show.html.twig', [
+            'comics' => $comics,
+        ]);
     }
 
     /**
