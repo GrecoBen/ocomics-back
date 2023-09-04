@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comics
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="main-box clearfix">
+					<div class="table-responsive">
+						<table class="table user-list">
+							<h1>{{comics.title}}</h1>
+
+							<table class="table">
+								<tbody>
+									<tr>
+										<th>Id</th>
+										<td>{{ comics.id }}</td>
+									</tr>
+									<tr>
+										<th>Titre</th>
+										<td>{{ comics.title }}</td>
+									</tr>
+									<tr>
+										<th>Date de publication</th>
+										<td>{{ comics.releasedAt ? comics.releasedAt|date('Y-m-d H:i:s') : '' }}</td>
+									</tr>
+									<tr>
+										<th>Synopsis</th>
+										<td>{{ comics.synopsis }}</td>
+									</tr>
+									<tr>
+										<th>Image</th>
+										<td>{{ comics.poster }}</td>
+									</tr>
+									<tr>
+										<th>Type</th>
+										<td>{{ comics.rarity }}</td>
+									</tr>
+								</tbody>
+							</table>
+
+							<a href="{{ path('app_admin_comics_list') }}">Retour à la liste des comics</a>
+
+							<a href="{{ path('app_admin_comics_edit', {'id': comics.id}) }}">Editer le comics</a>
+
+							{{ include('admin/comics/_delete_form.html.twig') }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endblock %}
+
