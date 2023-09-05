@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Comics;
+use App\Repository\UserRepository;
+use App\Repository\ComicsRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\WishCollectionRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ApiWishListController extends AbstractController
 {
     /**
-     * Show the wish collection (wishlist)
+     * Return the wishcollection (ownedlist) as a JSON
      * @Route("/api/wishlist", name="api_wishlist", methods={"GET"})
      */
     public function getWishList(WishCollectionRepository $wishCollectionRepository): JsonResponse
@@ -27,24 +30,63 @@ class ApiWishListController extends AbstractController
     }
 
     /**
-     * Add a comic to the "je recherche" list
-     * @Route("/api/wish-list/add/{id}", name="api_wish_list_add")
+     * Add a comic to the user wishlist
+     * @Route("/api/wishlist/add/{userId}/{comicsId}", name="app_api_wishlist_add", methods={"POST"})
+     * @param int $userId User ID to retrieve the userCollection 
+     * @param int $comicsId Comic ID to add to the ownlist of the current user
+     * @param EntityManagerInterface $entityManager
      */
-    public function addToWishList(Comics $comics): JsonResponse
+    public function addToWishList(int $userId, int $comicsId, EntityManagerInterface $entityManager, UserRepository $userRepository, ComicsRepository $comicsRepository): JsonResponse
     {
-        // Ajoutez la logique pour ajouter le comics à la liste "je recherche"
-
-        return $this->json(['message' => 'Comic added to "je recherche" list']);
+        // Retrieve the user with his ID
+        $user = $userRepository->find($userId);
+    
+        // Retrieve the comics with his ID
+        $comics = $comicsRepository->find($comicsId);
+    
+        if (!$user || !$comics) {
+            return $this->json(['message' => 'Utilisateur ou comics inexistant.'], Response::HTTP_NOT_FOUND);
+        }
+    
+        // add the comics to the wishCollection (the user wishlist) and save it in the database
+        $wishCollection = $user->getWishCollection();
+        $wishCollection->addComics($comics);
+    
+        $entityManager->persist($wishCollection);
+        $entityManager->flush();
+    
+        return $this->json(['message' => 'Le comics a bien été ajouté à la liste des comics recherchés!']);
     }
 
     /**
-     * Remove a comic from the "je recherche" list
-     * @Route("/api/wish-list/remove/{id}", name="api_wish_list_remove")
+     * Remove a comic from the user wishlist
+     * @Route("/api/wishlist/remove/{userId}/{comicsId}", name="app_api_wishlist_remove", methods={"DELETE"})
+     * @param int $userId User ID to retrieve the userCollection 
+     * @param int $comicsId Comic ID to remove from the wishlist of the current user
+     * @param EntityManagerInterface $entityManager
+     * @param UserRepository $userRepository
+     * @param ComicsRepository $comicsRepository
+     * @return JsonResponse
      */
-    public function removeFromWishList(Comics $comics): JsonResponse
+    public function removeFromWishList(int $userId, int $comicsId, EntityManagerInterface $entityManager, UserRepository $userRepository, ComicsRepository $comicsRepository): JsonResponse
     {
-        // Ajoutez la logique pour supprimer le comics de la liste "je recherche"
+        // Retrieve the user with his ID
+        $user = $userRepository->find($userId);
 
-        return $this->json(['message' => 'Comic removed from "je recherche" list']);
+        // Retrieve the comics with his ID
+        $comics = $comicsRepository->find($comicsId);
+
+        if (!$user || !$comics) {
+            return $this->json(['message' => 'Utilisateur ou comics inexistant.'], Response::HTTP_NOT_FOUND);
+        }
+
+        // Remove the comics from the wishCollection (the user wishlist) and save it in the database
+        $wishCollection = $user->getWishCollection();
+        $wishCollection->removeComics($comics);
+
+        $entityManager->persist($wishCollection);
+        $entityManager->flush();
+
+        return $this->json(['message' => 'Le comics a bien été retiré de la liste des comics recherchés.']);
     }
 }
