@@ -21,16 +21,23 @@
 		</title>
 
 	</head>
-	<body>
+	<body class="d-flex flex-column min-vh-100">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand mx-2" href="{{ path('app_admin_comics_list') }}">O'Comics Backoffice</a>
+			<a class="navbar-brand mx-2" href="{{ path('app_admin_comics_list') }}">
+				<img src="{{ asset('assets/Logo.png')}}" class="rounded" height="64" alt="Logo O'Comics">
+			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav mx-auto">
-					<a class="nav-item nav-link active" href="{{ path('app_admin_comics_list') }}">Liste des comics</a>
-					<a class="nav-item nav-link active" href="http://localhost:5173/">Espace utilisateur</a>
+				{# show a login link if not connected, otherwise replace it by a logout link #}
+					<a class="nav-item nav-link {% block listActive %}{% endblock %}" href="{{ path('app_admin_comics_list') }}">Liste des comics</a>
+					{% if is_granted('ROLE_USER') %}
+						<a class="nav-item nav-link" href="{{ path('app_security_logout') }}">Déconnexion</a>
+					{% else %}
+						<a class="nav-item nav-link" href="{{ path('app_security_login') }}">Connexion</a>
+					{% endif %}
 				</div>
 			</div>
 		</nav>
@@ -38,11 +45,11 @@
 		{% block body %}{% endblock %}
 	</body>
 
-	<footer class="d-flex flex-wrap justify-content-center align-items-center py-3 my-4 border-top bg-dark">
+	<footer class="d-flex flex-wrap mt-auto justify-content-center align-items-center py-3 my-4 border-top bg-dark">
 		<div class="col-md-4 d-flex justify-content-center align-items-center">
 			<span class="mb-3 mb-md-0 text-white text-center">&copy; 2023 O'Comics</span>
 		</div>
 	</footer>
-	
+
 </html>
 
