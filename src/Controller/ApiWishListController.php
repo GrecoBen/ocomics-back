@@ -20,10 +20,10 @@ class ApiWishListController extends AbstractController
      */
     public function getWishList(WishCollectionRepository $wishCollectionRepository): JsonResponse
     {
-        // Récupérez l'utilisateur connecté
+        // Retrieve the current User
         $user = $this->getUser();
         
-        // Récupérez la wishlist de l'utilisateur 
+        // Retrieve the wishlist of the User
         $wishlist = $wishCollectionRepository->findBy(['user' => $user]);
     
         return $this->json($wishlist, JsonResponse::HTTP_OK, [], ['groups' => 'wishlist']);
@@ -34,7 +34,6 @@ class ApiWishListController extends AbstractController
      * @Route("/api/wishlist/add/{userId}/{comicsId}", name="app_api_wishlist_add", methods={"POST"})
      * @param int $userId User ID to retrieve the userCollection 
      * @param int $comicsId Comic ID to add to the ownlist of the current user
-     * @param EntityManagerInterface $entityManager
      */
     public function addToWishList(int $userId, int $comicsId, EntityManagerInterface $entityManager, UserRepository $userRepository, ComicsRepository $comicsRepository): JsonResponse
     {
@@ -63,9 +62,6 @@ class ApiWishListController extends AbstractController
      * @Route("/api/wishlist/remove/{userId}/{comicsId}", name="app_api_wishlist_remove", methods={"DELETE"})
      * @param int $userId User ID to retrieve the userCollection 
      * @param int $comicsId Comic ID to remove from the wishlist of the current user
-     * @param EntityManagerInterface $entityManager
-     * @param UserRepository $userRepository
-     * @param ComicsRepository $comicsRepository
      * @return JsonResponse
      */
     public function removeFromWishList(int $userId, int $comicsId, EntityManagerInterface $entityManager, UserRepository $userRepository, ComicsRepository $comicsRepository): JsonResponse

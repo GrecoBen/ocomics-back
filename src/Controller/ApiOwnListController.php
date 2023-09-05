@@ -24,10 +24,10 @@ class ApiOwnListController extends AbstractController
      */
     public function getOwnedList(UserCollectionRepository $userCollectionRepository): JsonResponse
     {
-        // Récupérez l'utilisateur connecté
+        // Retrieve the current User
         $user = $this->getUser();
         
-        // Récupérez la ownedlist de l'utilisateur 
+        // Retrieve the ownedlist of the User
         $ownedlist = $userCollectionRepository->findBy(['user' => $user]);
     
         return $this->json($ownedlist, JsonResponse::HTTP_OK, [], ['groups' => 'ownedlist']);
@@ -38,7 +38,6 @@ class ApiOwnListController extends AbstractController
      * @Route("/api/ownedlist/add/{userId}/{comicsId}", name="app_api_ownedlist_add", methods={"POST"})
      * @param int $userId User ID to retrieve the userCollection 
      * @param int $comicsId Comic ID to add to the ownlist of the current user
-     * @param EntityManagerInterface $entityManager
      */
     public function addToOwnList(int $userId, int $comicsId, EntityManagerInterface $entityManager, UserRepository $userRepository, ComicsRepository $comicsRepository): JsonResponse
     {
@@ -67,9 +66,6 @@ class ApiOwnListController extends AbstractController
      * @Route("/api/ownedlist/remove/{userId}/{comicsId}", name="app_api_ownedlist_remove", methods={"DELETE"})
      * @param int $userId User ID to retrieve the userCollection 
      * @param int $comicsId Comic ID to remove from the ownedlist of the current user
-     * @param EntityManagerInterface $entityManager
-     * @param UserRepository $userRepository
-     * @param ComicsRepository $comicsRepository
      * @return JsonResponse
      */
     public function removeFromOwnedList(int $userId, int $comicsId, EntityManagerInterface $entityManager, UserRepository $userRepository, ComicsRepository $comicsRepository): JsonResponse
