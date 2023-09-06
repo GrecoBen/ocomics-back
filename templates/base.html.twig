@@ -31,12 +31,13 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav mx-auto">
+					<a class="nav-item nav-link" href="http://localhost:5173/">Espace utilisateur</a>
 				{# show a login link if not connected, otherwise replace it by a logout link #}
 					<a class="nav-item nav-link {% block listActive %}{% endblock %}" href="{{ path('app_admin_comics_list') }}">Liste des comics</a>
 					{% if is_granted('ROLE_USER') %}
 						<a class="nav-item nav-link" href="{{ path('app_security_logout') }}">Déconnexion</a>
 					{% else %}
-						<a class="nav-item nav-link" href="{{ path('app_security_login') }}">Connexion</a>
+						<a class="nav-item nav-link {% block loginActive %}{% endblock %}" href="{{ path('app_security_login') }}">Connexion</a>
 					{% endif %}
 				</div>
 			</div>
