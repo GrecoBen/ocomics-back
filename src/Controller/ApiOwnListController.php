@@ -35,14 +35,15 @@ class ApiOwnListController extends AbstractController
 
     /**
      * Add a comic to the user ownedlist
-     * @Route("/api/ownedlist/add/{userId}/{comicsId}", name="app_api_ownedlist_add", methods={"POST"})
-     * @param int $userId User ID to retrieve the userCollection 
+     * @Route("/api/ownedlist/add/{comicsId}", name="app_api_ownedlist_add", methods={"POST"})
      * @param int $comicsId Comic ID to add to the ownlist of the current user
      */
-    public function addToOwnList(int $userId, int $comicsId, EntityManagerInterface $entityManager, UserRepository $userRepository, ComicsRepository $comicsRepository): JsonResponse
+    public function addToOwnList(int $comicsId, EntityManagerInterface $entityManager, UserRepository $userRepository, ComicsRepository $comicsRepository): JsonResponse
     {
         // Retrieve the user with his ID
-        $user = $userRepository->find($userId);
+        //$user = $userRepository->find($userId);
+        // Retrieve the current User
+        $user = $this->getUser();
     
         // Retrieve the comics with his ID
         $comics = $comicsRepository->find($comicsId);
@@ -63,15 +64,17 @@ class ApiOwnListController extends AbstractController
 
     /**
      * Remove a comic from the user ownedlist
-     * @Route("/api/ownedlist/remove/{userId}/{comicsId}", name="app_api_ownedlist_remove", methods={"DELETE"})
-     * @param int $userId User ID to retrieve the userCollection 
+     * @Route("/api/ownedlist/remove/{comicsId}", name="app_api_ownedlist_remove", methods={"DELETE"})
      * @param int $comicsId Comic ID to remove from the ownedlist of the current user
      * @return JsonResponse
      */
-    public function removeFromOwnedList(int $userId, int $comicsId, EntityManagerInterface $entityManager, UserRepository $userRepository, ComicsRepository $comicsRepository): JsonResponse
+    public function removeFromOwnedList(int $comicsId, EntityManagerInterface $entityManager, UserRepository $userRepository, ComicsRepository $comicsRepository): JsonResponse
     {
         // Retrieve the user with his ID
-        $user = $userRepository->find($userId);
+        //$user = $userRepository->find($userId);
+
+        // Retrieve the current User
+        $user = $this->getUser();
 
         // Retrieve the comics with his ID
         $comics = $comicsRepository->find($comicsId);
