@@ -49,7 +49,7 @@ class MarvelApiUrlGenerator
         return $url;
     }
 
-    public function generateCharactersUrl($limit = 10, $offset = 0)
+    public function generateCharactersUrl($limit = 50, $offset = 0)
 {
     // Base URL for characters endpoint
     $baseUrl = 'https://gateway.marvel.com:443/v1/public/characters';
