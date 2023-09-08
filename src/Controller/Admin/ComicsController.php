@@ -17,9 +17,9 @@ class ComicsController extends AbstractController
      * @Route("/", name="app_admin_comics_list")
      * Homepage, display the list of all the comicss
      */
-    public function index(ComicsRepository $comicsRepository): Response
+    public function index(ComicsRepository $comicsRepository, Request $request): Response
     {
-        $allComics = $comicsRepository->findAll();
+        $allComics = $comicsRepository->findAllOrderByTitleSearch($request->get("search"));
         return $this->render('admin/comics/list.html.twig', [
             'allComics' => $allComics
         ]);
