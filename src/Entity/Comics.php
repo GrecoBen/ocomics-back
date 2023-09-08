@@ -41,7 +41,7 @@ class Comics
     private $poster;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable", nullable=true)
      * @Groups({"comics", "charactersWithRelation", "comicsWithRelation"})
      * @Assert\NotBlank
      */

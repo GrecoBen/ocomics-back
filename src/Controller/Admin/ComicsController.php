@@ -45,14 +45,14 @@ class ComicsController extends AbstractController
         $comics = new comics();
         $form = $this->createForm(comicsType::class, $comics);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
 
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($comics);
             $entityManager->flush();
-
             $this->addFlash("success", "Comics ajouté avec succès!");
-
             return $this->redirectToRoute('app_admin_comics_list');
+        } elseif ($form->isSubmitted()) {
+            $this->addFlash("danger", "L'ajout du comics a échoué!");
         }
 
         return $this->renderForm("admin/comics/form.html.twig", [

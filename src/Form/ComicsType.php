@@ -28,13 +28,15 @@ class ComicsType extends AbstractType
             ->add('poster', UrlType::class, [
                 "label" => "URL de l'image de couverture",
                 "attr" => [
-                    "placeholder" => "Entrer ici l'URL de l'image qui sera affiché"
+                    "placeholder" => "l'URL de l'image qui sera affiché"
                 ]
             ])
             ->add('released_at', DateTimeType::class, [
                 'label' => 'Année de sortie',
                 "widget" => "single_text",
                 "input" => "datetime_immutable",
+                "invalid_message" => "La date de publication doit être renseignée.",
+                'row_attr' => ['class' => 'col-2']
             ])
             ->add('synopsis', TextType::class, [
                 "label" => "synopsis",
@@ -51,12 +53,12 @@ class ComicsType extends AbstractType
                     "Inhabituel" => 2,
                     "Commun" => 1
                 ],
-                "expanded" => true
+                "expanded" => false
             ])
             ->add('author', EntityType::class, [
                 "class" => Author::class,
                 "label" => "Auteur du comics",
-                "expanded" => true,
+                "expanded" => false,
                 "choice_label" => "lastname"
             ])
             ->add('characters', EntityType::class, [
