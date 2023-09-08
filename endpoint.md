@@ -1,90 +1,21 @@
-<?php
+# Endpoints API
 
-namespace App\Controller;
-
-use App\Entity\Comics;
-use App\Repository\UserRepository;
-use App\Repository\ComicsRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\WishCollectionRepository;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
-class ApiWishListController extends AbstractController
-{
-    /**
-     * Return the wishcollection (ownedlist) as a JSON
-     * @Route("/api/wishlist", name="api_wishlist", methods={"GET"})
-     */
-    public function getWishList(WishCollectionRepository $wishCollectionRepository): JsonResponse
-    {
-        // Retrieve the current User
-        $user = $this->getUser();
-        
-        // Retrieve the wishlist of the User
-        $wishlist = $wishCollectionRepository->findBy(['user' => $user]);
-    
-        return $this->json($wishlist, JsonResponse::HTTP_OK, [], ['groups' => 'wishlist']);
-    }
-
-    /**
-     * Add a comic to the user wishlist
-     * @Route("/api/wishlist/add/{comicsId}", name="app_api_wishlist_add", methods={"POST"})
-     * @param int $comicsId Comic ID to add to the ownlist of the current user
-     */
-    public function addToWishList(int $comicsId, EntityManagerInterface $entityManager, UserRepository $userRepository, ComicsRepository $comicsRepository): JsonResponse
-    {
-        // Retrieve the user with his ID
-        //$user = $userRepository->find($userId);
-        // Retrieve the current User
-        $user = $this->getUser();
-    
-        // Retrieve the comics with his ID
-        $comics = $comicsRepository->find($comicsId);
-    
-        if (!$user || !$comics) {
-            return $this->json(['message' => 'Utilisateur ou comics inexistant.'], Response::HTTP_NOT_FOUND);
-        }
-    
-        // add the comics to the wishCollection (the user wishlist) and save it in the database
-        $wishCollection = $user->getWishCollection();
-        $wishCollection->addComics($comics);
-    
-        $entityManager->persist($wishCollection);
-        $entityManager->flush();
-    
-        return $this->json(['message' => 'Le comics a bien été ajouté à la liste des comics recherchés!']);
-    }
-
-    /**
-     * Remove a comic from the user wishlist
-     * @Route("/api/wishlist/remove/{comicsId}", name="app_api_wishlist_remove", methods={"DELETE"})
-     * @param int $comicsId Comic ID to remove from the wishlist of the current user
-     * @return JsonResponse
-     */
-    public function removeFromWishList(int $comicsId, EntityManagerInterface $entityManager, UserRepository $userRepository, ComicsRepository $comicsRepository): JsonResponse
-    {
-        // Retrieve the user with his ID
-        //$user = $userRepository->find($userId);
-        // Retrieve the current User
-        $user = $this->getUser();
-
-        // Retrieve the comics with his ID
-        $comics = $comicsRepository->find($comicsId);
-
-        if (!$user || !$comics) {
-            return $this->json(['message' => 'Utilisateur ou comics inexistant.'], Response::HTTP_NOT_FOUND);
-        }
-
-        // Remove the comics from the wishCollection (the user wishlist) and save it in the database
-        $wishCollection = $user->getWishCollection();
-        $wishCollection->removeComics($comics);
-
-        $entityManager->persist($wishCollection);
-        $entityManager->flush();
-
-        return $this->json(['message' => 'Le comics a bien été retiré de la liste des comics recherchés.']);
-    }
-}
+| Contrôleur                | Endpoint                            | Méthodes HTTP | Description                            |
+|---------------------------|-------------------------------------|---------------|----------------------------------------|
+| ApiCharacterController    | `/api/character`                    | GET           | Liste des personnages                 |
+| ApiCharacterController    | `/api/home-character`               | GET           | Liste des cinq premiers personnages   |
+| ApiCharacterController    | `/api/character/{id}`               | GET           | Afficher un personnage donné        |
+| ApiComicsController       | `/api/comics`                       | GET           | Liste des comics                      |
+| ApiComicsController       | `/api/comics/{id}`                  | GET           | Afficher un comics donné               |
+| ApiComicsController       | `/api/home-comics`                  | GET           | Liste des neuf premiers comics        |
+| ApiComicsController       | `/api/search-comics`                | GET           | Rechercher des comics par titre       |
+| ApiComicsController       | `/api/admin/comics/add`             | POST          | Ajouter un comic                      |
+| ApiComicsController       | `/api/admin/comics/update/{id}`     | PUT           | Update un comics       |
+| ApiComicsController       | `/api/admin/comics/delete/{id}`     | DELETE        | Supprimer un comics          |
+| ApiOwnListController      | `/api/ownedlist`                    | GET           | Liste des comics possédés par l'utilisateur |
+| ApiOwnListController      | `/api/ownedlist/add/{comicsId}`     | POST          | Ajouter un comics à la liste des comics possédés par l'utilisateur     |
+| ApiOwnListController      | `/api/ownedlist/remove/{comicsId}`  | DELETE        | Retirer un comics de la liste des comics possédés par l'utilisateur    |
+| ApiWishListController     | `/api/wishlist`                     | GET           | Liste de la wishlist de l'utilisateur |
+| ApiWishListController     | `/api/wishlist/add/{comicsId}`      | POST          | Ajouter un comics à la wishlist de l'utilisateur      |
+| ApiWishListController     | `/api/wishlist/remove/{comicsId}`   | DELETE        | Retirer un comics de la wishlist de l'utilisateur     |
+| ApiRegisterController     | `/api/register`                     | POST          | Créer un nouvel utilisateur           |

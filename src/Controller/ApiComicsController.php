@@ -130,7 +130,7 @@ class ApiComicsController extends AbstractController
 
     /**
      * Update a comics
-     * @Route("/api/admin/comics/{id}/update", name="app_api_admin_comics_update", methods={"PUT"})
+     * @Route("/api/admin/comics/update/{id}", name="app_api_admin_comics_update", methods={"PUT"})
      */
     public function updateComics($id, Request $request, ComicsRepository $comicsRepository, SerializerInterface $serializer, ValidatorInterface $validator, EntityManagerInterface $entityManager): JsonResponse
     {
@@ -169,7 +169,7 @@ class ApiComicsController extends AbstractController
 
     /**
      * Delete a comics
-     * @Route("/api/admin/comics/{id}/delete", name="app_api_admin_comics_delete", methods={"DELETE"})
+     * @Route("/api/admin/comics/delete/{id}", name="app_api_admin_comics_delete", methods={"DELETE"})
      */
     public function deleteComics($id, ComicsRepository $comicsRepository, EntityManagerInterface $entityManager): JsonResponse
     {
