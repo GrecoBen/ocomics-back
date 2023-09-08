@@ -50,6 +50,8 @@ class ComicsController extends AbstractController
             $entityManager->persist($comics);
             $entityManager->flush();
 
+            $this->addFlash("success", "Comics ajouté avec succès!");
+
             return $this->redirectToRoute('app_admin_comics_list');
         }
 
@@ -69,6 +71,9 @@ class ComicsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             $entityManager->flush();
+            $entityManager->persist($comics);
+
+            $this->addFlash("success", "Le comics a bien été édité.");
 
             return $this->redirectToRoute('app_admin_comics_list');
         }
@@ -84,6 +89,8 @@ class ComicsController extends AbstractController
     public function delete(Comics $comics, ComicsRepository $comicsRepository): Response
     {
         $comicsRepository->remove($comics, true);
+
+        $this->addFlash("success", "Le comics a bien été supprimé.");
 
         return $this->redirectToRoute('app_admin_comics_list', [], Response::HTTP_SEE_OTHER);
     }
