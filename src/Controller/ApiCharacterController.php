@@ -27,7 +27,7 @@ class ApiCharacterController extends AbstractController
      */
     public function homeCharacters(CharactersRepository $charactersRepository): JsonResponse
     {
-        $characters = $charactersRepository->findFiveCharacters();
+        $characters = $charactersRepository->findSixCharacters();
 
         return $this->json($characters, Response::HTTP_OK, [], ['groups' => 'charactersWithRelation']);
     }
