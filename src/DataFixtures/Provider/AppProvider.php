@@ -35,6 +35,11 @@ class AppProvider
             "roles" => ["ROLE_ADMIN"],
             "password" => "thanh"
         ],
+        "baba" => [
+            "email" => "baba@oclock.io",
+            "roles" => ["ROLE_ADMIN"],
+            "password" => "baba"
+        ],
     ];
 
     // private $comicsData = [

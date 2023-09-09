@@ -32,7 +32,7 @@ class MarvelApiUrlGenerator
         );
     }
 
-    public function generateComicsUrl($limit = 20, $offset = 0)
+    public function generateComicsUrl($limit = 100, $offset = 0)
     {
         // Base URL for comics endpoint
         $baseUrl = 'https://gateway.marvel.com:443/v1/public/comics';
@@ -49,7 +49,7 @@ class MarvelApiUrlGenerator
         return $url;
     }
 
-    public function generateCharactersUrl($limit = 50, $offset = 0)
+    public function generateCharactersUrl($limit = 100, $offset = 0)
 {
     // Base URL for characters endpoint
     $baseUrl = 'https://gateway.marvel.com:443/v1/public/characters';

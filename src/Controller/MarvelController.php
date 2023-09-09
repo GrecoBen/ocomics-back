@@ -89,7 +89,7 @@ class MarvelController extends AbstractController
     public function getRandomMarvelComics(MarvelApiUrlGenerator $urlGenerator): Response
     {
         // Define the limit of items to retrieve
-        $limit = 50;
+        $limit = 150;
 
         // Generate the URL for comics information using the provided service
         $url = $urlGenerator->generateComicsUrl($limit);
@@ -133,7 +133,7 @@ class MarvelController extends AbstractController
     public function getRandomMarvelCharacters(Request $request, MarvelApiUrlGenerator $urlGenerator): Response
     {
         // Define the limit of items to retrieve
-        $limit = 50;
+        $limit = 150;
 
         // Generate the URL for characters information using the provided service
         $url = $urlGenerator->generateCharactersUrl($limit);

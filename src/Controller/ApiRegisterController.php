@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\UserCollection;
+use App\Entity\WishCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -29,7 +31,12 @@ class ApiRegisterController extends AbstractController
     {
         // deserialize and validate the JSON data
         $newUser = $this->serializer->deserialize($request->getContent(), User::class, 'json');
-        
+
+        // ...
+        $userCollection = new UserCollection();
+        $wishCollection = new WishCollection();
+        // ...
+
         $errors = $validator->validate($newUser, null, ["registration"]);
     
         if (count($errors) > 0) {
@@ -40,7 +47,13 @@ class ApiRegisterController extends AbstractController
         $plainPassword = $newUser->getPassword();
         $hashedPassword = $passwordHasher->hashPassword($newUser, $plainPassword);
         $newUser->setPassword($hashedPassword);
+        // ...
+        $newUser->setUserCollection($userCollection);
+        $newUser->setWishCollection($wishCollection);
     
+        $wishCollection->setUser($newUser);
+        $userCollection->setUser($newUser);
+        // ...
         $entityManager->persist($newUser);
         $entityManager->flush();
     
