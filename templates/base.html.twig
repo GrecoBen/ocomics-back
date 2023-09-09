@@ -36,6 +36,9 @@
 					<a class="nav-item nav-link {% block listActive %}{% endblock %}" href="{{ path('app_admin_comics_list') }}">Liste des comics</a>
 					{% if is_granted('ROLE_USER') %}
 						<a class="nav-item nav-link" href="{{ path('app_security_logout') }}">Déconnexion</a>
+						{% set username = app.user.username %}
+						<span class="nav-item nav-link">Bienvenue,
+							{{ username }}</span>					
 					{% else %}
 						<a class="nav-item nav-link {% block loginActive %}{% endblock %}" href="{{ path('app_security_login') }}">Connexion</a>
 					{% endif %}
@@ -48,10 +51,6 @@
 				</form>
 			</div>
 		</nav>
-
-		{% set username = app.user.username %}
-		<span class="font-weight-bold my-4 mx-4">Bienvenue,
-			{{ username }}</span>
 
 		{% include "fragments/_flash_message.html.twig" %}
 
