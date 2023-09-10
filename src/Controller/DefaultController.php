@@ -14,6 +14,6 @@ class DefaultController extends AbstractController
     public function index(): Response
     {
         // Remplacez cette partie par le chemin vers votre fichier index.html
-        return $this->file('%kernel.project_dir%/public/index.html');
+        return $this->file('%kernel.project_dir%/public/index.php');
     }
 }
