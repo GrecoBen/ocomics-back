@@ -60,7 +60,7 @@ class MarvelController extends AbstractController
         // Define the limit of items per page
         $limit = 30;
 
-        // Calculate the offset based on the page number
+        // Calculate the offsbuildet based on the page number
         $offset = ($page - 1) * $limit;
 
         // Generate the URL for comics information using the provided service
